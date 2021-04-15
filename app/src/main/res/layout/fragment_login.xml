@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@drawable/background_login"
+    tools:context=".LoginFragment">
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="180dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="136dp"
+        android:background="@drawable/icon_coloured"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.463"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+    </View>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edit_text_email_cred_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="16dp"
+        android:hint="@string/email_cred"
+        android:inputType="textEmailAddress"
+        android:textColorHint="@color/text_color_primary"
+        android:theme="@style/myTextInputLabel"
+        app:boxBackgroundColor="@color/colorPrimary"
+        app:boxStrokeColor="@color/text_color_primary"
+        app:endIconTint="@color/icon_color_primary"
+        app:hintAnimationEnabled="true"
+        app:hintTextColor="@color/text_color_primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view"
+        app:startIconDrawable="@drawable/ic_action_user"
+        app:startIconTint="@color/icon_color_primary">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:id="@+id/edit_text_email_cred"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color_primary" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edit_text_pass_cred_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:hint="@string/pass_cred"
+        android:textColorHint="@color/text_color_primary"
+        android:theme="@style/myTextInputLabel"
+        app:boxBackgroundColor="@color/colorPrimary"
+        app:boxStrokeColor="@color/text_color_primary"
+        app:endIconMode="password_toggle"
+        app:endIconTint="@color/icon_color_primary"
+        app:hintAnimationEnabled="true"
+        app:hintTextColor="@color/text_color_primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_text_email_cred_layout"
+        app:startIconDrawable="@drawable/ic_action_passkey"
+        app:startIconTint="@color/icon_color_primary">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:id="@+id/edit_text_pass_cred"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:textColor="@color/text_color_primary"
+
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="@color/icon_color_primary"
+        android:text="@string/login_button"
+        android:textColor="@color/colorPrimary"
+        app:elevation="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/forgot_password"
+        app:rippleColor="@color/colorPrimary" />
+
+    <TextView
+        android:id="@+id/forgot_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/forgot_password"
+        android:textColor="@color/text_color_primary"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.996"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_text_pass_cred_layout" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar_login"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/icon_color_primary"
+        android:indeterminateTintMode="src_atop"
+        android:progressTint="@color/icon_color_primary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
