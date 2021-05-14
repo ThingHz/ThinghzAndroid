@@ -1,24 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ThingHzApplication</string>
-    <string name="title_activity_splash">SplashActivity</string>
-    <!--
-    This string is used for square devices and overridden by hello_world in
-    values-round/strings.xml for round devices.
-    -->
-    <string name="hello_world">Hello Square World!</string>
-    <string name="title_activity_login">LoginActivity</string>
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="email_cred">Email or username</string>
     <string name="pass_cred">Password</string>
+    <string name="email_cred">Username</string>
     <string name="login_button">Login</string>
     <string name="forgot_password">Forgot Password?</string>
+    <string name="device_name">Device Name</string>
+    <string name="device_id">THING00001</string>
+    <string name="escalation">Escalation</string>
+    <string name="battery_value">100%</string>
+    <string name="escalation_value">5</string>
+    <string name="temp_value">5</string>
+    <string name="temp_label">TEMPERATURE</string>
+    <string name="humid_value">90%</string>
+    <string name="humid_label">HUMIDITY</string>
+    <string name="analysis">ANALYSIS</string>
+    <string name="add_Device">ADD Device</string>
+    <string name="sign_out">Logout</string>
+    <string name="user_name">UserName</string>
+    <string name="email_id">Email Id</string>
+    <string name="location">Location</string>
+    <string name="add">ADD</string>
+    <string name="percent">%</string>
+    <string name="degree_cel">°C</string>
+    <string name="gas_label">Gas</string>
+    <string name="accel_label">Accel</string>
+    <string name="gyro_label">Gyro</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
+    <string name="app_name">ThingHz</string>
+    <string name="added_devices">Added Devices</string>
+    <string name="max_temp">Max Temp</string>
+    <string name="min_temp">Min Temp</string>
+    <string-array name="max_Temp_enteries">
+        <item> 20</item>
+        <item>19</item>
+        <item>18</item>
+        <item>17</item>
+        <item>16</item>
+        <item>15</item>
+        <item>14</item>
+        <item>13</item>
+        <item>12</item>
+        <item>11</item>
+        <item>10</item>
+        <item>9</item>
+        <item>8</item>
+        <item>7</item>
+        <item>6</item>
+        <item>5</item>
+        <item>4</item>
+        <item>3</item>
+        <item>2</item>
+        <item>1</item>
+        <item>0</item>
+    </string-array>
+    <string-array name="min_Temp_enteries">
+        <item> 10</item>
+        <item>9</item>
+        <item>8</item>
+        <item>7</item>
+        <item>6</item>
+        <item>5</item>
+        <item>4</item>
+        <item>3</item>
+        <item>2</item>
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+        <item>-2</item>
+        <item>-3</item>
+        <item>-4</item>
+        <item>-5</item>
+        <item>-6</item>
+        <item>-7</item>
+        <item>-8</item>
+        <item>-9</item>
+        <item>-10</item>
+        <item>-11</item>
+        <item>-12</item>
+        <item>-13</item>
+        <item>-14</item>
+        <item>-15</item>
+        <item>-16</item>
+        <item>-17</item>
+        <item>-18</item>
+        <item>-19</item>
+        <item>-20</item>
+        <item>-21</item>
+        <item>-22</item>
+        <item>-23</item>
+        <item>-24</item>
+        <item>-25</item>
+    </string-array>
+    <string-array name="device_status_enteries">
+        <item>online</item>
+        <item>offline</item>
+    </string-array>
+    <string-array name="sensor_profile_enteries">
+        <item>Temperature </item>
+        <item>Temperature and Humidity </item>
+        <item>Gas</item>
+        <item>Gyro and Accel</item>
+        <item>Moisture</item>
+        <item>Control</item>
+        <item>Capacitance</item>
+    </string-array>
+    <string-array name="escalation_enteries">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="logout_menuitem">Logout</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="user_management">User Management</string>
+    <string name="about">About</string>
+    <string name="download_report">Download Report</string>
+    <string name="user_info">User</string>
+    <string name="filter">Filter Devices</string>
+    <string name="all_devices">All Devices</string>
+    <string name="role_label">Role:</string>
+    <string name="role_value">Admin</string>
+    <string name="email_label">Email:</string>
+    <string name="email_value">abc@gmail.com</string>
+    <string name="status_label">Status:</string>
+    <string name="status_value">Active</string>
+    <string name="location_label">Location:</string>
+    <string name="location_value">Baijnath</string>
+    <string name="device_status">Device Status</string>
+    <string name="sensor_profile">Sensor Profile</string>
+    <string name="filter_device">Filter</string>
+    <string name="reset_filter">Reset</string>
+    <string name="data_not_available">No data available for selected filters, Select the appropriate filters</string>
 </resources>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".AddDeviceBottomSheetFragment"
+    android:orientation="vertical">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edit_text_device_neame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/device_name"
+        android:layout_margin="16dp"
+        android:inputType="text"
+        android:textColorHint="@color/text_color_dark_87"
+        android:theme="@style/myTextInputLabelAdd"
+        app:boxBackgroundColor="@color/icon_color_primary"
+        app:boxStrokeColor="@color/colorPrimary"
+        app:endIconTint="@color/colorPrimary"
+        app:hintAnimationEnabled="true"
+        app:hintTextColor="@color/text_color_dark_87"
+        app:startIconDrawable="@drawable/ic_device_name_svg"
+        app:startIconTint="@color/colorPrimary">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:id="@+id/edit_text_device_name"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:textColor="@color/text_color_dark_87" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:weightSum="2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/max_temp"
+            android:layout_weight="1"
+            android:textColor="@color/text_color_dark_60"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/min_temp"
+            android:layout_weight="1"
+            android:textColor="@color/text_color_dark_60"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:dropDownWidth="80dp"
+            android:id="@+id/spinner_max_temp"
+            android:layout_height="wrap_content"/>
+
+        <Spinner
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:dropDownWidth="80dp"
+            android:id="@+id/spinner_min_temp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_add_device"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="@string/add_Device"
+        android:textColor="@color/text_color_light"
+        android:elevation="5dp"
+        android:layout_gravity="center"
+        app:rippleColor="@color/text_color_light" />
+
+</LinearLayout>

@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitApiBuilder  {
     private final String baseUrl = "https://api.thinghz.com/";
-    private static Retrofit retrofit = null;
+    private  Retrofit retrofit = null;
     OkHttpClient okHttpClient = new OkHttpClient.Builder()
             .connectTimeout(1, TimeUnit.MINUTES)
             .readTimeout(30, TimeUnit.SECONDS)
@@ -24,7 +24,7 @@ public class RetrofitApiBuilder  {
         this.retrofit = retrofit;
     }
 
-    public static Retrofit getRetrofitClient(){
+    public Retrofit getRetrofitClient(){
         return retrofit;
     }
 }

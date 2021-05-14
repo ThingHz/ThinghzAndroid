@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main_graph.xml"
+    app:startDestination="@id/devicesRecycleFragment">
+
+    <fragment
+        android:id="@+id/devicesRecycleFragment"
+        android:name="com.example.thinghzapplication.DevicesRecycleFragment"
+        android:label="fragment_devices_recycle"
+        tools:layout="@layout/fragment_devices_recycle" />
+</navigation>

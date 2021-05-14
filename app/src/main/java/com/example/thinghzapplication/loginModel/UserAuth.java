@@ -2,27 +2,27 @@ package com.example.thinghzapplication.loginModel;
 
 
 public class UserAuth {
-    private static String authToken;
-    private static boolean isFirstUser;
+    private  String authToken;
+    private  boolean isFirstUser;
 
     public UserAuth(String authToken,boolean isFirstUser) {
         this.authToken = authToken;
         this. isFirstUser = isFirstUser;
     }
 
-    public static String getAuthToken() {
+    public String getAuthToken() {
         return authToken;
     }
 
-    public static boolean getIsFirstUser() {
+    public boolean getIsFirstUser() {
         return isFirstUser;
     }
 
-    public static void setAuthToken(String authToken) {
-        UserAuth.authToken = authToken;
+    public void setAuthToken(String authToken) {
+        this.authToken = authToken;
     }
 
-    public static void setIsFirstUser(boolean isFirstUser) {
-        UserAuth.isFirstUser = isFirstUser;
+    public void setIsFirstUser(boolean isFirstUser) {
+        this.isFirstUser = isFirstUser;
     }
 }

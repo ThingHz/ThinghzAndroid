@@ -10,9 +10,15 @@ public class AddDeviceResponseModel{
 	@SerializedName("Success")
 	private boolean success;
 
+	@SerializedName("error")
+	private String error;
+
+
 	public Data getData(){
 		return data;
 	}
+
+	public String getError() { return error; }
 
 	public boolean isSuccess(){
 		return success;

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:weightSum="3"
+    android:background="@color/colorPrimary"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:layout_width="0dp"
+        app:tint="@color/icon_color_primary"
+        android:layout_height="30dp"
+        android:padding="5dp"
+        android:layout_gravity="center"
+        android:id="@+id/iv_user_manage"
+        android:layout_weight="1"
+        android:src="@drawable/ic_user_svg"
+        />
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_weight="1"
+        android:padding="5dp"
+        android:id="@+id/iv_add_device"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_add_device_svg"
+        />
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_weight="1"
+        android:padding="5dp"
+        android:id="@+id/iv_support"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_customer_service_svg"
+        app:tint="@color/icon_color_primary" />
+
+
+
+</LinearLayout>

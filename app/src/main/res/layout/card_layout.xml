@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="end"
+    android:layout_margin="5dp"
+    android:paddingStart="20sp"
+    android:paddingEnd="20sp"
+    android:id="@+id/device_card"
+    app:cardBackgroundColor="@color/icon_color_primary"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp"
+    app:cardMaxElevation="5dp"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true">
+
+    <com.chauthai.swipereveallayout.SwipeRevealLayout
+        android:id="@+id/swipe_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:dragEdge="right"
+        app:mode="same_level">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:background="@color/escalation_5"
+                android:padding="15dp"
+                android:gravity="center"
+                android:id="@+id/iv_delete_device"
+                android:src="@drawable/ic_delete_svg" />
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_device_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="start"
+                android:text="@string/device_name"
+                android:textColor="@color/text_color_dark_87"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_device_id"
+                android:layout_width="97dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="8dp"
+                android:gravity="start"
+                android:text="@string/device_id"
+                android:textColor="@color/text_color_dark_60"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_device_name" />
+
+            <TextView
+                android:id="@+id/tv_escalation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="8dp"
+                android:gravity="start"
+                android:text="@string/escalation"
+                android:textColor="@color/text_color_dark_60"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_icon_temp" />
+
+            <TextView
+                android:id="@+id/tv_battery_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:hapticFeedbackEnabled="false"
+                android:text="@string/battery_value"
+                android:textColor="@color/text_color_dark_87"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_battery_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="2dp"
+                android:src="@drawable/ic_battery_svg"
+                app:layout_constraintEnd_toStartOf="@+id/tv_battery_value"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/colorPrimaryDark" />
+
+            <ImageView
+                android:id="@+id/iv_icon_temp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="start"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:src="@drawable/ic_temp_online_svg"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_device_id"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/tv_escalation_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="start"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:text="@string/escalation_value"
+                android:textColor="@color/text_color_dark_87"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/tv_escalation"
+                app:layout_constraintStart_toStartOf="@+id/tv_escalation"
+                app:layout_constraintTop_toBottomOf="@+id/tv_escalation" />
+
+            <TextView
+                android:id="@+id/tv_temp_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:paddingStart="0dp"
+                android:paddingEnd="4dp"
+                android:text="@string/temp_value"
+                android:textColor="@color/text_color_dark_87"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toStartOf="@+id/tv_humid_value"
+                app:layout_constraintStart_toEndOf="@+id/iv_icon_temp"
+                app:layout_constraintTop_toBottomOf="@+id/iv_battery_icon" />
+
+            <TextView
+                android:id="@+id/tv_temp_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/temp_label"
+                android:textColor="@color/text_color_dark_60"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="@+id/tv_temp_value"
+                app:layout_constraintStart_toStartOf="@+id/tv_temp_value"
+                app:layout_constraintTop_toBottomOf="@+id/tv_temp_value" />
+
+            <TextView
+                android:id="@+id/tv_humid_value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:layout_marginEnd="8dp"
+                android:paddingStart="2dp"
+                android:paddingEnd="2dp"
+                android:text="@string/humid_value"
+                android:textColor="@color/text_color_dark_87"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_battery_icon" />
+
+            <TextView
+                android:id="@+id/tv_humid_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/humid_label"
+                android:textColor="@color/text_color_dark_60"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="@+id/tv_humid_value"
+                app:layout_constraintStart_toStartOf="@+id/tv_humid_value"
+                app:layout_constraintTop_toBottomOf="@+id/tv_humid_value" />
+
+            <ImageView
+                android:id="@+id/iv_icon_settings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="24dp"
+                android:gravity="start"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:src="@drawable/ic_settings_svg"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:tint="@color/colorPrimaryDark" />
+
+            <Button
+                android:id="@+id/analysis_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:elevation="5dp"
+                android:text="@string/analysis"
+                android:textColor="@color/text_color_light"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/iv_icon_settings"
+                app:layout_constraintStart_toEndOf="@+id/tv_escalation_value"
+                app:rippleColor="@color/text_color_light_87" />
+
+            <TextView
+                android:id="@+id/tv_timestamp_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="16dp"
+                android:text="TextView"
+                android:textColor="@color/text_color_dark_87"
+                app:layout_constraintBottom_toTopOf="@+id/analysis_button"
+                app:layout_constraintEnd_toEndOf="@+id/tv_humid_value"
+                app:layout_constraintStart_toStartOf="@+id/tv_temp_value" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.chauthai.swipereveallayout.SwipeRevealLayout>
+</androidx.cardview.widget.CardView>
+

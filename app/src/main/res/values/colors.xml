@@ -1,10 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#0067B3 </color>
-    <color name="colorPrimaryDark">#0067B3 </color>
+    <color name="colorPrimaryDark">#44546A</color>
     <color name="colorAccent">#0067B3 </color>
     <color name="colorBackgroundSplash">#FFFFFF</color>
-    <color name="text_color_primary">#FFFFFF</color>
+    <color name="text_color_light">#FFFFFF</color>
+    <color name="text_color_light_60">#99FFFFFF</color>
+    <color name="text_color_light_87">#DEFFFFFF</color>
+    <color name="text_color_dark">#000000</color>
+    <color name="color_transparent">#40000000</color>
+    <color name="text_color_dark_87">#DE000000</color>
+    <color name="text_color_dark_60">#99000000</color>
+    <color name="text_color_dark_40">#66000000</color>
+    <color name="text_color_dark_20">#33000000</color>
     <color name="icon_color_primary">#FFFFFF</color>
     <color name="mtrl_textinput_default_box_stroke_color">#FFFFFF</color>
+    <color name="recycler_backgraound">#f6f5f5</color>
+    <color name="icon_offline">#BFBFBF</color>
+    <color name="color_background_primary">#0067B3</color>
+    <color name="color_background_promaryDark">#44546A</color>
+    <color name="color_background_promaryLight">#FFFFFF</color>
+    <color name="color_background_transparent">#E6FFFFFF</color>
+    <color name="escalation_0">#388e3c</color>
+    <color name="escalation_1">#ffeb3b</color>
+    <color name="escalation_2">#ffc107</color>
+    <color name="escalation_3">#ff9800</color>
+    <color name="escalation_4">#ff5722</color>
+    <color name="escalation_5">#f44336</color>
 </resources>
