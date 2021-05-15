@@ -9,8 +9,8 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface DeleteDeviceInterface {
-    @DELETE("v1/devices/{device_id}")
+    @DELETE("v1/device/{device_id}")
     Call<DeleteDeviceModel> getResponse(@Header("Authorization") String auth,
-                                        @Query("escalation") Integer escalation,
-                                        @Path("device_id") String deviceId);
+                                        @Path("device_id") String deviceId,
+                                        @Query("escalation") Integer escalation);
 }

@@ -32,6 +32,7 @@ import com.example.thinghzapplication.deviceModel.DataItem;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.TimeZone;
 
@@ -40,10 +41,13 @@ public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.My
     private static final String TAG = "DeviceListAdapter";
     Context context;
     private final ViewBinderHelper viewBinderHelper = new ViewBinderHelper();
+    private DeleteClickListener mlistener;
 
-    public DeviceListAdapter(Context context, List<DataItem> deviceList) {
+
+    public DeviceListAdapter(Context context, List<DataItem> deviceList,DeleteClickListener mlistener) {
         this.deviceList = deviceList;
         this.context = context;
+        this.mlistener = mlistener;
     }
 
     @NonNull
@@ -266,8 +270,11 @@ public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.My
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                removeItem(holder.getAdapterPosition());
-                                Toast.makeText(context, "Device Deleted: " + dataItem.getDeviceId(), Toast.LENGTH_SHORT).show();
+                                int actualPosition = holder.getAdapterPosition();
+                                String deviceid = deviceList.get(actualPosition).getDeviceId();
+                                Integer escalation = deviceList.get(actualPosition).getEscalation();
+                                removeItem(actualPosition);
+                                mlistener.onDeleteClick(deviceid,escalation);
                             }
                         }).setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
@@ -336,5 +343,10 @@ public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.My
             deleteButton = itemView.findViewById(R.id.iv_delete_device);
             cardViewLayout = itemView.findViewById(R.id.device_card);
         }
+    }
+
+
+    public interface DeleteClickListener {
+        void onDeleteClick(String deviceId, Integer escalation);
     }
 }

@@ -24,10 +24,12 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.thinghzapplication.Utils.KeysUtils;
 import com.example.thinghzapplication.Utils.PermissionUtils;
 import com.example.thinghzapplication.Utils.SharedPreferanceHelper;
+import com.example.thinghzapplication.deleteDeviceModel.DeleteDeviceModel;
 import com.example.thinghzapplication.deviceModel.DataItem;
 import com.example.thinghzapplication.deviceModel.GetDeviceResponseModel;
 import com.example.thinghzapplication.loginModel.UserAuth;
 import com.example.thinghzapplication.retrofitBuilder.RetrofitApiBuilder;
+import com.example.thinghzapplication.retrofitInterface.DeleteDeviceInterface;
 import com.example.thinghzapplication.retrofitInterface.GetdeviceData;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
@@ -39,7 +41,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class DevicesRecycleFragment extends Fragment {
+public class DevicesRecycleFragment extends Fragment implements DeviceListAdapter.DeleteClickListener{
     private View view;
     private RecyclerView recyclerView;
     private Retrofit retrofit;
@@ -54,6 +56,7 @@ public class DevicesRecycleFragment extends Fragment {
     String deviceStatus = null;
     Integer escalation = null;
     Integer sensor_profile = null;
+    UserAuth userAuth;
 
     public DevicesRecycleFragment() {
         // Required empty public constructor
@@ -65,7 +68,7 @@ public class DevicesRecycleFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_devices_recycle, container, false);
         SharedPreferanceHelper sharedPreferanceHelper = SharedPreferanceHelper.getInstance(getActivity());
-        UserAuth userAuth = sharedPreferanceHelper.getUserSavedValue();
+        userAuth = sharedPreferanceHelper.getUserSavedValue();
         RetrofitApiBuilder retrofitApiBuilder = new RetrofitApiBuilder(retrofit);
         Bundle arguments = getArguments();
 
@@ -93,7 +96,7 @@ public class DevicesRecycleFragment extends Fragment {
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh);
         progressBarRecycler = view.findViewById(R.id.progress_bar_recycler);
         retrofitUpdateData(userAuth.getAuthToken(),deviceStatus,escalation,sensor_profile);
-        deviceListAdapter = new DeviceListAdapter(getActivity(),deviceList);
+        deviceListAdapter = new DeviceListAdapter(getActivity(),deviceList,this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -159,6 +162,31 @@ public class DevicesRecycleFragment extends Fragment {
             }
             @Override
             public void onFailure(Call<GetDeviceResponseModel> call, Throwable t) {
+            }
+        });
+    }
+
+    @Override
+    public void onDeleteClick(String deviceId, Integer escalation) {
+        retrofitDeleteData(userAuth.getAuthToken(),escalation,deviceId);
+    }
+
+    private void retrofitDeleteData(String authToken, Integer escalation, String deviceId) {
+        DeleteDeviceInterface deleteDeviceInterface = retrofit.create(DeleteDeviceInterface.class);
+        Call<DeleteDeviceModel> deviceResponseModelCall = deleteDeviceInterface.getResponse(authToken,deviceId,escalation);
+        deviceResponseModelCall.enqueue(new Callback<DeleteDeviceModel>() {
+            @Override
+            public void onResponse(Call<DeleteDeviceModel> call, Response<DeleteDeviceModel> response) {
+                if (response.code() != 200) {
+                    Toast.makeText(getActivity(), "Error: " + response.code(), Toast.LENGTH_SHORT).show();
+                }else if (!response.body().isSuccess()) {
+                    Toast.makeText(getActivity(), "Error: " + response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<DeleteDeviceModel> call, Throwable t) {
             }
         });
     }
