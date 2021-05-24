@@ -1,6 +1,7 @@
 package com.example.thinghzapplication;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -8,6 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -49,6 +52,7 @@ public class AddDeviceActivity extends AppCompatActivity implements AddDeviceBot
     int sensor_profile = 0;
     private final String TAG = AddDeviceActivity.this.getClass().getSimpleName();
     private Retrofit retrofit;
+    AlertDialog.Builder alertbuilder;
     UserAuth userAuth;
     List<DataItem> deviceList = new ArrayList<>();
     AddedDeviceListAdapter deviceListAdapter;
@@ -73,7 +77,7 @@ public class AddDeviceActivity extends AppCompatActivity implements AddDeviceBot
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(AddDeviceActivity.this, result.getText(), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(AddDeviceActivity.this, result.getText(), Toast.LENGTH_SHORT).show();
                             try {
                                 JSONObject root = new JSONObject(result.getText());
                                 device_id = root.getString("device_id");
@@ -172,7 +176,7 @@ public class AddDeviceActivity extends AppCompatActivity implements AddDeviceBot
                 }if (!response.body().isSuccess()) {
                     Toast.makeText(AddDeviceActivity.this, "Error: " + response.body().getError(), Toast.LENGTH_SHORT).show();
                 }else{
-                    onBackPressed();
+                    setupAlertDialog();
                 }
             }
 
@@ -182,5 +186,26 @@ public class AddDeviceActivity extends AppCompatActivity implements AddDeviceBot
             }
 
         });
+    }
+
+    private void setupAlertDialog() {
+        alertbuilder = new AlertDialog.Builder(this);
+        alertbuilder.setMessage("Do you want to setup WiFi configuration for this device?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(getApplicationContext(),ConfigureWiFiActivity.class);
+                        startActivity(intent);
+                    }
+                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+        AlertDialog alert = alertbuilder.create();
+        alert.setTitle("Logout");
+        alert.show();
     }
 }

@@ -20,7 +20,7 @@
     <color name="color_background_primary">#0067B3</color>
     <color name="color_background_promaryDark">#44546A</color>
     <color name="color_background_promaryLight">#FFFFFF</color>
-    <color name="color_background_transparent">#E6FFFFFF</color>
+    <color name="color_background_transparent">#33000000</color>
     <color name="escalation_0">#388e3c</color>
     <color name="escalation_1">#ffeb3b</color>
     <color name="escalation_2">#ffc107</color>

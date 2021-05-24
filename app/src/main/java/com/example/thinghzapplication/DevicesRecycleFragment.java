@@ -1,6 +1,5 @@
 package com.example.thinghzapplication;
 
-import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -14,15 +13,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.thinghzapplication.Utils.KeysUtils;
-import com.example.thinghzapplication.Utils.PermissionUtils;
 import com.example.thinghzapplication.Utils.SharedPreferanceHelper;
 import com.example.thinghzapplication.deleteDeviceModel.DeleteDeviceModel;
 import com.example.thinghzapplication.deviceModel.DataItem;

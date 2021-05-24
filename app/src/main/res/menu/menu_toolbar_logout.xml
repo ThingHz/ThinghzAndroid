@@ -9,4 +9,11 @@
         android:title="@string/logout_menuitem"
         android:icon="@drawable/ic_power_button_svg"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/item_wifi"
+        android:orderInCategory="200"
+        android:title="@string/logout_menuitem"
+        android:icon="@drawable/ic_wifi_signal_white_svg"
+        android:iconTint="@color/icon_color_primary"
+        app:showAsAction="ifRoom" />
 </menu>

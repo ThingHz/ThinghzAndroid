@@ -137,4 +137,11 @@
     <string name="filter_device">Filter</string>
     <string name="reset_filter">Reset</string>
     <string name="data_not_available">No data available for selected filters, Select the appropriate filters</string>
+    <string name="set_up_wifi_cred">Steps to setup WiFi Cred\n\nStep 1. To set up WiFi SSID and password for the device. Press RST button on the right side of device once\n\nStep 2. Now enable Wifi\n\nStep 3. Connect to ThingHz from the list of available WiFi Connection</string>
+    <string name="wifi_not_enabled">WiFi not enabled, Enable the WiFi from WiFi Settings</string>
+    <string name="connect_to_thing">From list of available wifi network connect to ThingHz</string>
+    <string name="ssid">WiFi SSID</string>
+    <string name="wifi_pass">WiFi PassKey</string>
+    <string name="configure">Configure</string>
+    <string name="waiting">Waiting for successful Connection</string>
 </resources>

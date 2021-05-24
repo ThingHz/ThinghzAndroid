@@ -51,6 +51,7 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment:2.3.5"
     implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
     testImplementation 'junit:junit:4.12'
     implementation 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

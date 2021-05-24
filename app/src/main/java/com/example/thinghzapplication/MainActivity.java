@@ -45,6 +45,9 @@ public class MainActivity extends AppCompatActivity implements EscalationListAda
     private Toolbar toolbar;
     private Fragment fragment;
     private static final int CAMERA_PERMISSION_REQUEST = 1003;
+    private static final int ACCESS_WIFI_REQUEST = 1004;
+    private static final int CHANGE_WIFI_REQUEST = 1005;
+
     private FragmentManager fragmentManager;
     AlertDialog.Builder alertbuilder;
     UserAuthModel userAuthModel;
@@ -73,6 +76,13 @@ public class MainActivity extends AppCompatActivity implements EscalationListAda
         PermissionUtils.requestPermission(MainActivity.this,
                 CAMERA_PERMISSION_REQUEST,
                 Manifest.permission.CAMERA);
+        PermissionUtils.requestPermission(MainActivity.this,
+                ACCESS_WIFI_REQUEST,
+                Manifest.permission.ACCESS_WIFI_STATE);
+        PermissionUtils.requestPermission(MainActivity.this,
+                CHANGE_WIFI_REQUEST,
+                Manifest.permission.CHANGE_WIFI_STATE);
+
         alertbuilder = new AlertDialog.Builder(this);
         all_devices = findViewById(R.id.tv_all_devices);
         dashboard = findViewById(R.id.tv_dashboard);
@@ -251,6 +261,16 @@ public class MainActivity extends AppCompatActivity implements EscalationListAda
                 Toast.makeText(MainActivity.this, "Permission granted for Camera", Toast.LENGTH_SHORT).show();
             }
         }
+        if(requestCode == ACCESS_WIFI_REQUEST){
+            if (PermissionUtils.permissionGranted(requestCode, ACCESS_WIFI_REQUEST, grantResults)) {
+                Toast.makeText(MainActivity.this, "Permission granted to access wifi state", Toast.LENGTH_SHORT).show();
+            }
+        }
+        if(requestCode == CHANGE_WIFI_REQUEST){
+            if (PermissionUtils.permissionGranted(requestCode, CHANGE_WIFI_REQUEST, grantResults)) {
+                Toast.makeText(MainActivity.this, "Permission granted to change wifi state", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override
@@ -283,6 +303,9 @@ public class MainActivity extends AppCompatActivity implements EscalationListAda
             alert.setTitle("Logout");
             alert.show();
             return true;
+        }else if(id == R.id.item_wifi){
+            Intent intent = new Intent(getApplicationContext(),ConfigureWiFiActivity.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
