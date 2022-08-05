@@ -2,13 +2,13 @@
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorPrimary">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/tv_all_devices"
@@ -91,23 +91,42 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view2" />
 
-    <TextView
-        android:id="@+id/textView3"
+    <LinearLayout
         android:layout_width="match_parent"
+        android:id="@+id/layout_device_status"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:orientation="horizontal"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/device_status"
-        android:textColor="@color/text_color_light_87"
-        android:textSize="16sp"
+        android:weightSum="3"
+        android:layout_marginStart="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" >
+        <TextView
+            android:id="@+id/tv_device_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/device_status"
+            android:textColor="@color/text_color_light_87"
+            android:textSize="16sp"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:id="@+id/iv_drop_down_device_status"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:layout_gravity="end"
+            android:src="@drawable/ic_down_arrow_svg" />
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_device_status"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
@@ -115,22 +134,41 @@
         android:theme="@style/AppTheme.PopupOverlay"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/layout_device_status"
         tools:itemCount="2" />
 
-    <TextView
-        android:id="@+id/textView4"
+    <LinearLayout
         android:layout_width="match_parent"
+        android:id="@+id/layout_sensor_profile"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
+        android:weightSum="3"
+        android:layout_marginStart="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rv_device_status"  >
+
+    <TextView
+        android:id="@+id/tv_sensor_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
         android:text="@string/sensor_profile"
         android:textColor="@color/text_color_light_87"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_device_status" />
+        />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:id="@+id/iv_drop_down_sensor_profile"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:layout_gravity="end"
+            android:src="@drawable/ic_down_arrow_svg" />
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_sensor_profile"
@@ -138,26 +176,49 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
+        android:visibility="gone"
         android:layout_marginEnd="16dp"
         android:theme="@style/AppTheme.PopupOverlay"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/layout_sensor_profile"
         tools:itemCount="2" />
 
-    <TextView
-        android:id="@+id/textView5"
+    <LinearLayout
         android:layout_width="match_parent"
+        android:id="@+id/layout_escalation"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/escalation"
-        android:textColor="@color/text_color_light_87"
-        android:textSize="16sp"
+        android:weightSum="3"
+        android:layout_marginStart="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_sensor_profile" />
+        app:layout_constraintTop_toBottomOf="@+id/rv_sensor_profile"  >
+
+
+        <TextView
+            android:id="@+id/tv_escalation_rv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/escalation"
+            android:layout_weight="2"
+            android:textColor="@color/text_color_light_87"
+            android:textSize="16sp"
+         />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:id="@+id/iv_drop_down_escalation"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:layout_gravity="end"
+            android:src="@drawable/ic_down_arrow_svg" />
+
+    </LinearLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_escalation"
@@ -166,10 +227,11 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
+        android:visibility="gone"
         android:theme="@style/AppTheme.PopupOverlay"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/layout_escalation"
         tools:itemCount="3" />
 
     <Button
@@ -199,6 +261,7 @@
         android:textColor="@color/colorPrimary"
         app:layout_constraintStart_toEndOf="@id/button_Filter"
         app:layout_constraintTop_toBottomOf="@+id/rv_escalation" />
+
 
 
     <View
@@ -233,7 +296,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view3" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

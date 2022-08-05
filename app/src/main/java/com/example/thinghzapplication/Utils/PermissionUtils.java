@@ -1,5 +1,6 @@
 package com.example.thinghzapplication.Utils;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
 
@@ -13,7 +14,7 @@ public class PermissionUtils {
         ArrayList<String> permissionNeeded = new ArrayList<>();
 
         for (String s: permissions){
-            int permissionCheck = ActivityCompat.checkSelfPermission(activity, s);
+            int permissionCheck = activity.checkSelfPermission(s);
             boolean permissionGranted = (permissionCheck == PackageManager.PERMISSION_GRANTED);
             granted &= permissionGranted;
             if (!permissionGranted){
@@ -23,6 +24,10 @@ public class PermissionUtils {
         if (granted){
             return true;
         }else {
+            if (!activity.shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
+                activity.requestPermissions(new String[permissionNeeded.size()],
+                        requestCode);
+            }
             ActivityCompat.requestPermissions(activity,
                     permissionNeeded.toArray(new String[permissionNeeded.size()]),
                     requestCode);
