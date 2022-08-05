@@ -31,6 +31,11 @@
     <string name="added_devices">Added Devices</string>
     <string name="max_temp">Max Temp</string>
     <string name="min_temp">Min Temp</string>
+    <string name="max_humid">Max Temp</string>
+    <string name="min_humid">Min Temp</string>
+    <string name="max_gas">Max Temp</string>
+    <string name="min_gas">Min Temp</string>
+
     <string-array name="max_Temp_enteries">
         <item>12</item>
         <item>14</item>

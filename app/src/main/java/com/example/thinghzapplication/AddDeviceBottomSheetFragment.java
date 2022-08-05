@@ -28,7 +28,7 @@ import java.util.HashMap;
 
 public class AddDeviceBottomSheetFragment extends BottomSheetDialogFragment implements View.OnClickListener{
 
-    Spinner spinner_max_temp,spinner_min_Temp;
+    Spinner spinner_max_temp,spinner_min_Temp,spinner_max_humidity,spinner_min_humidity,spinner_max_carbon,spinner_min_carbon;
     EditText device_name;
     TextInputLayout edit_text_device_neame_layout;
     View view;
@@ -51,17 +51,34 @@ public class AddDeviceBottomSheetFragment extends BottomSheetDialogFragment impl
         super.onViewCreated(view, savedInstanceState);
         spinner_max_temp = view.findViewById(R.id.spinner_max_temp);
         spinner_min_Temp = view.findViewById(R.id.spinner_min_temp);
+        spinner_max_humidity = view.findViewById(R.id.spinner_max_humidity);
+        spinner_min_humidity = view.findViewById(R.id.spinner_min_humidity);
+        spinner_max_carbon = view.findViewById(R.id.spinner_max_carbon);
+        spinner_min_carbon = view.findViewById(R.id.spinner_min_carbon);
+        spinner_min_carbon = view.findViewById(R.id.spinner_min_carbon);
         device_name = view.findViewById(R.id.edit_text_device_name);
         edit_text_device_neame_layout = view.findViewById(R.id.edit_text_device_neame_layout);
         add_device_button = view.findViewById(R.id.button_add_device);
         device_name.setImeOptions(EditorInfo.IME_ACTION_DONE);
         ArrayAdapter adapterMaxTemp = ArrayAdapter.createFromResource(getActivity(), R.array.max_Temp_enteries, android.R.layout.simple_expandable_list_item_1);
         adapterMaxTemp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         spinner_max_temp.setAdapter(adapterMaxTemp);
         ArrayAdapter adapterminTemp = ArrayAdapter.createFromResource(getActivity(), R.array.min_Temp_enteries, android.R.layout.simple_expandable_list_item_1);
         adapterminTemp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_min_Temp.setAdapter(adapterminTemp);
+        ArrayAdapter adapterMaxHumidity = ArrayAdapter.createFromResource(getActivity(), R.array.max_Humidity_enteries, android.R.layout.simple_expandable_list_item_1);
+        adapterMaxHumidity.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_max_humidity.setAdapter(adapterMaxHumidity);
+        ArrayAdapter adapterMinHumidity = ArrayAdapter.createFromResource(getActivity(), R.array.min_Humidity_enteries, android.R.layout.simple_expandable_list_item_1);
+        adapterMinHumidity.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_min_humidity.setAdapter(adapterMinHumidity);
+        ArrayAdapter adapterMaxCarbon = ArrayAdapter.createFromResource(getActivity(), R.array.max_carbon_enteries, android.R.layout.simple_expandable_list_item_1);
+        adapterMaxCarbon.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_max_carbon.setAdapter(adapterMaxCarbon);
+        ArrayAdapter adapterMinCarbon = ArrayAdapter.createFromResource(getActivity(), R.array.min_carbon_enteries, android.R.layout.simple_expandable_list_item_1);
+        adapterMinCarbon.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_min_carbon.setAdapter(adapterMinCarbon);
+
         add_device_button.setOnClickListener(this);
         return view;
     }
@@ -129,6 +146,21 @@ public class AddDeviceBottomSheetFragment extends BottomSheetDialogFragment impl
                 isMinTempSelected = false;
             }
 
+        });
+
+        spinner_max_humidity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Log.i(TAG,"Selected Value maxTemp="+adapterView.getItemAtPosition(i).toString());
+                String maxHumidSelsction = adapterView.getItemAtPosition(i).toString();
+                map.put(KeysUtils.getMap_max_humid(),maxHumidSelsction);
+                isMaxTempSelected = true;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
         });
 
         if (isDeviceNameEntered && isMaxTempSelected && isMinTempSelected) {
