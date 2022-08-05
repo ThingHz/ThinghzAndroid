@@ -28,6 +28,7 @@ import com.example.thinghzapplication.retrofitBuilder.RetrofitApiBuilder;
 import com.example.thinghzapplication.retrofitInterface.DeleteDeviceInterface;
 import com.example.thinghzapplication.retrofitInterface.GetdeviceData;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -165,6 +166,13 @@ public class DevicesRecycleFragment extends Fragment implements DeviceListAdapte
     @Override
     public void onDeleteClick(String deviceId, Integer escalation) {
         retrofitDeleteData(userAuth.getAuthToken(),escalation,deviceId);
+    }
+
+    @Override
+    public void onSettingClick(Integer position) {
+        Intent intent = new Intent(getActivity(),SettingsActivity.class);
+        intent.putExtra("DeviceData",new Gson().toJson(deviceList.get(position)));
+        startActivity(intent);
     }
 
     private void retrofitDeleteData(String authToken, Integer escalation, String deviceId) {

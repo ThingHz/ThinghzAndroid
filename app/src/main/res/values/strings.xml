@@ -32,65 +32,77 @@
     <string name="max_temp">Max Temp</string>
     <string name="min_temp">Min Temp</string>
     <string-array name="max_Temp_enteries">
-        <item> 20</item>
-        <item>19</item>
-        <item>18</item>
-        <item>17</item>
-        <item>16</item>
-        <item>15</item>
-        <item>14</item>
-        <item>13</item>
         <item>12</item>
-        <item>11</item>
-        <item>10</item>
-        <item>9</item>
-        <item>8</item>
-        <item>7</item>
-        <item>6</item>
-        <item>5</item>
-        <item>4</item>
-        <item>3</item>
-        <item>2</item>
-        <item>1</item>
-        <item>0</item>
+        <item>14</item>
+        <item>16</item>
+        <item>18</item>
+        <item>20</item>
+        <item>22</item>
+        <item>24</item>
+        <item>26</item>
+        <item>28</item>
+        <item>30</item>
     </string-array>
+
     <string-array name="min_Temp_enteries">
-        <item> 10</item>
-        <item>9</item>
-        <item>8</item>
-        <item>7</item>
-        <item>6</item>
-        <item>5</item>
-        <item>4</item>
-        <item>3</item>
-        <item>2</item>
-        <item>1</item>
         <item>0</item>
-        <item>-1</item>
-        <item>-2</item>
-        <item>-3</item>
-        <item>-4</item>
-        <item>-5</item>
-        <item>-6</item>
-        <item>-7</item>
-        <item>-8</item>
-        <item>-9</item>
-        <item>-10</item>
-        <item>-11</item>
-        <item>-12</item>
-        <item>-13</item>
-        <item>-14</item>
-        <item>-15</item>
-        <item>-16</item>
-        <item>-17</item>
-        <item>-18</item>
-        <item>-19</item>
-        <item>-20</item>
-        <item>-21</item>
-        <item>-22</item>
-        <item>-23</item>
-        <item>-24</item>
-        <item>-25</item>
+        <item>2</item>
+        <item>4</item>
+        <item>6</item>
+        <item>8</item>
+        <item>10</item>
+    </string-array>
+
+    <string-array name="max_Humidity_enteries">
+        <item>60</item>
+        <item>65</item>
+        <item>70</item>
+        <item>75</item>
+        <item>80</item>
+        <item>85</item>
+        <item>90</item>
+        <item>95</item>
+        <item>100</item>
+    </string-array>
+
+    <string-array name="min_Humidity_enteries">
+        <item>20</item>
+        <item>25</item>
+        <item>30</item>
+        <item>35</item>
+        <item>40</item>
+        <item>45</item>
+        <item>50</item>
+        <item>55</item>
+        <item>60</item>
+    </string-array>
+
+    <string-array name="max_carbon_enteries">
+        <item>600</item>
+        <item>700</item>
+        <item>800</item>
+        <item>900</item>
+        <item>1000</item>
+        <item>1100</item>
+        <item>1200</item>
+        <item>1300</item>
+        <item>1400</item>
+        <item>1500</item>
+        <item>1600</item>
+        <item>1700</item>
+        <item>1800</item>
+        <item>1900</item>
+        <item>2000</item>
+    </string-array>
+
+    <string-array name="min_carbon_enteries">
+        <item>0</item>
+        <item>100</item>
+        <item>200</item>
+        <item>300</item>
+        <item>400</item>
+        <item>500</item>
+        <item>600</item>
     </string-array>
     <string-array name="device_status_enteries">
         <item>online</item>
@@ -144,4 +156,11 @@
     <string name="wifi_pass">WiFi PassKey</string>
     <string name="configure">Configure</string>
     <string name="waiting">Waiting for successful Connection</string>
+    <string name="user">User</string>
+    <string name="max_humidity">Max Humidity</string>
+    <string name="min_humidity">Min Humidity</string>
+    <string name="max_carbon_dioxide">Max Carbon dioxide</string>
+    <string name="min_carbon_dioxide">Min Carbon dioxide</string>
+    <string name="profile_value">Profile Value</string>
+    <string name="update_device_settings">Update Device Settings</string>
 </resources>

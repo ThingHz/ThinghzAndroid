@@ -283,30 +283,59 @@ public class MainActivity extends AppCompatActivity implements EscalationListAda
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.item_logout) {
-            alertbuilder.setMessage("Do you want to logout from application?")
-                    .setCancelable(false)
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            SharedPreferanceHelper.getInstance(MainActivity.this).removeToken(true);
-                            Intent intent = new Intent(getApplicationContext(),NavigationActivity.class);
-                            startActivity(intent);
-                        }
-                    }).setNegativeButton("No", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    dialogInterface.cancel();
-                }
-            });
-            AlertDialog alert = alertbuilder.create();
-            alert.setTitle("Logout");
-            alert.show();
-            return true;
-        }else if(id == R.id.item_wifi){
+        switch (id){
+            case R.id.item_logout:
+                alertbuilder.setMessage("Do you want to logout from application?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                SharedPreferanceHelper.getInstance(MainActivity.this).removeToken(true);
+                                Intent intent = new Intent(getApplicationContext(),NavigationActivity.class);
+                                startActivity(intent);
+                            }
+                        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.cancel();
+                            }
+                        });
+                AlertDialog alert = alertbuilder.create();
+                alert.setTitle("Logout");
+                alert.show();
+                break;
+
+            case R.id.item_user:{
+                /*fragment = new UserFragment();
+                Bundle arguments = new Bundle();
+                arguments.putString(KeysUtils.getUser_fragment_bundle_userName(), userAuthModel.getUserName());
+                arguments.putString(KeysUtils.getUser_fragment_bundle_email(), userAuthModel.getEmail_id());
+                arguments.putString(KeysUtils.getUser_fragment_bundle_location(),userAuthModel.getLocation());
+                Log.i(TAG,"arguments: "+arguments);
+                fragmentTransaction(fragment,arguments);*/
+                Intent intent = new Intent(getApplicationContext(),UserActivity.class);
+                intent.putExtra(KeysUtils.getUser_fragment_bundle_userName(),userAuthModel.getUserName());
+                intent.putExtra(KeysUtils.getUser_fragment_bundle_email(),userAuthModel.getEmail_id());
+                intent.putExtra(KeysUtils.getUser_fragment_bundle_location(),userAuthModel.getLocation());
+                startActivity(intent);
+                /*if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                }*/
+                break;
+            }
+            case R.id.item_wifi:
+                Intent intent = new Intent(getApplicationContext(),ConfigureWiFiActivity.class);
+                startActivity(intent);
+                break;
+        }
+
+        /*if (id == R.id.item_logout) {
+
+        }
+        else if(id == R.id.item_wifi){
             Intent intent = new Intent(getApplicationContext(),ConfigureWiFiActivity.class);
             startActivity(intent);
-        }
+        }*/
         return super.onOptionsItemSelected(item);
     }
 

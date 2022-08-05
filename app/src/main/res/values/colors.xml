@@ -27,4 +27,5 @@
     <color name="escalation_3">#ff9800</color>
     <color name="escalation_4">#ff5722</color>
     <color name="escalation_5">#f44336</color>
+    <color name="black">#000000</color>
 </resources>

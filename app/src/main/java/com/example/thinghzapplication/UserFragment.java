@@ -39,6 +39,8 @@ public class UserFragment extends Fragment {
         String email_id = arguments.getString(KeysUtils.getUser_fragment_bundle_email());
         Log.i(TAG,"email_id: "+email_id);
 
+
+
         tv_user_name =  view.findViewById(R.id.tv_userName_value);
         tv_location = view.findViewById(R.id.tv_location_value);
         tv_email_id = view.findViewById(R.id.tv_email_value);

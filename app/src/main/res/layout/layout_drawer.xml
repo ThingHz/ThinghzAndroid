@@ -51,6 +51,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
+        android:visibility="gone"
         android:drawablePadding="64dp"
         android:text="@string/user_info"
         android:textColor="@color/text_color_light"

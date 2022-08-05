@@ -287,6 +287,13 @@ public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.My
                 alert.show();
             }
         });
+
+        holder.iv_icon_settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mlistener.onSettingClick(position);
+            }
+        });
         Log.i(TAG, "DeviceEscalation:" + dataItem.getEscalation());
     }
 
@@ -319,7 +326,7 @@ public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.My
         public TextView deviceHumidLabel;
         public TextView deviceTempLable;
         public TextView timestampValue;
-        public ImageView deviceImage;
+        public ImageView deviceImage,iv_icon_settings;
         public Button analysisButton;
         public ImageView deleteButton;
         public SwipeRevealLayout swipeRevealLayout;
@@ -342,11 +349,13 @@ public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.My
             swipeRevealLayout = itemView.findViewById(R.id.swipe_layout);
             deleteButton = itemView.findViewById(R.id.iv_delete_device);
             cardViewLayout = itemView.findViewById(R.id.device_card);
+            iv_icon_settings = itemView.findViewById(R.id.iv_icon_settings);
         }
     }
 
 
     public interface DeleteClickListener {
         void onDeleteClick(String deviceId, Integer escalation);
+        void onSettingClick(Integer position);
     }
 }
