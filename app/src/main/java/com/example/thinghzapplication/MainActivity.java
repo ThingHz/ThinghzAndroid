@@ -37,6 +37,9 @@ import com.example.thinghzapplication.Utils.KeysUtils;
 import com.example.thinghzapplication.Utils.PermissionUtils;
 import com.example.thinghzapplication.Utils.SharedPreferanceHelper;
 import com.example.thinghzapplication.loginModel.UserAuth;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.json.JSONObject;
 
@@ -85,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements EscalationListAda
         deviceStatusRecycler = findViewById(R.id.rv_device_status);
         sensorProfileRecycler = findViewById(R.id.rv_sensor_profile);
         escalationRecycler = findViewById(R.id.rv_escalation);
+
         setUpToolbar();
         setUpDrawer();
         requestPermission();
@@ -97,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements EscalationListAda
         PermissionUtils.requestPermission(MainActivity.this,
                 CHANGE_WIFI_REQUEST,
                 Manifest.permission.CHANGE_WIFI_STATE);
+
 
 
         alertbuilder = new AlertDialog.Builder(this);
@@ -144,9 +149,23 @@ public class MainActivity extends AppCompatActivity implements EscalationListAda
         dashboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fragment = new DashboardFragment();
-                Bundle arguments = new Bundle();
-                fragmentTransaction(fragment,arguments);
+                //fragment = new DashboardFragment();
+                //Bundle arguments = new Bundle();
+                //fragmentTransaction(fragment,arguments);
+                FirebaseMessaging.getInstance().getToken()
+                        .addOnCompleteListener(new OnCompleteListener<String>() {
+                            @Override
+                            public void onComplete(@NonNull Task<String> task) {
+                                if (!task.isSuccessful()) {
+                                    Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+                                    return;
+                                }
+                                // Get new FCM registration token
+                                String token = task.getResult();
+                                Log.d(TAG, token);
+                                Toast.makeText(MainActivity.this, token, Toast.LENGTH_SHORT).show();
+                            }
+                        });
                 if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                     drawerLayout.closeDrawer(GravityCompat.START);
                 }
@@ -243,6 +262,8 @@ public class MainActivity extends AppCompatActivity implements EscalationListAda
         createEscalationList();
         createSensorProfileList();
     }
+
+
 
     private void requestPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

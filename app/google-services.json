@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "948122142799",
+    "project_id": "thinghz-push-notification",
+    "storage_bucket": "thinghz-push-notification.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:948122142799:android:fc6acb62a9b216d6c1023a",
+        "android_client_info": {
+          "package_name": "com.example.thinghzapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "948122142799-gi5ikb93ff8caalmqcc9o3prnjrcpohi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVfUMWd8iZL6bNE8aJlv9KffQfKxqH7D4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "948122142799-gi5ikb93ff8caalmqcc9o3prnjrcpohi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

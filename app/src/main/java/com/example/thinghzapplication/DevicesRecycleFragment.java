@@ -136,7 +136,7 @@ public class DevicesRecycleFragment extends Fragment implements DeviceListAdapte
         deviceResponseModelCall.enqueue(new Callback<GetDeviceResponseModel>() {
             @Override
             public void onResponse(Call<GetDeviceResponseModel> call, Response<GetDeviceResponseModel> response) {
-                Log.i(TAG,"size of Data: "+(response.body().getData().size()));
+                //Log.i(TAG,"size of Data: "+(response.body().getData().size()));
                 if (response.code() != 200) {
                     Toast.makeText(getActivity(), "Error: " + response.code(), Toast.LENGTH_SHORT).show();
                 }else if (!response.body().isSuccess()) {

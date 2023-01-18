@@ -24,4 +24,6 @@
         android:icon="@drawable/ic_wifi_signal_white_svg"
         android:iconTint="@color/icon_color_primary"
         app:showAsAction="ifRoom" />
+
+
 </menu>

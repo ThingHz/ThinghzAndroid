@@ -22,7 +22,8 @@
     <string name="add">ADD</string>
     <string name="percent">%</string>
     <string name="degree_cel">°C</string>
-    <string name="gas_label">Gas</string>
+    <string name="ppm_value">ppm</string>
+    <string name="gas_label">CO2</string>
     <string name="accel_label">Accel</string>
     <string name="gyro_label">Gyro</string>
     <string name="open">open</string>
@@ -131,9 +132,21 @@
         <item>5</item>
     </string-array>
 
+    <string-array name="graph_entries">
+        <item>temperature</item>
+        <item>humidity</item>
+        <item>CO2</item>
+        <item>temperature and Humidity</item>
+        <item>Combined</item>
+    </string-array>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="logout_menuitem">Logout</string>
+    <string name="two_hour_menuitem">2h</string>
+    <string name="twentyfour_hour_menuitem">24h</string>
+    <string name="tweleve_hour_menuitem">12h</string>
+    <string name="select_Graph">Graph</string>
     <string name="dashboard">Dashboard</string>
     <string name="user_management">User Management</string>
     <string name="about">About</string>
@@ -168,4 +181,6 @@
     <string name="min_carbon_dioxide">Min Carbon dioxide</string>
     <string name="profile_value">Profile Value</string>
     <string name="update_device_settings">Update Device Settings</string>
+    <string name="gas_value">400</string>
+    <string name="msg_token_fmt">token</string>
 </resources>

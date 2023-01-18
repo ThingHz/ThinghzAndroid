@@ -59,7 +59,7 @@ public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.My
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Animation animationCard = AnimationUtils.loadAnimation(context, R.anim.anim_card);
         DataItem dataItem = deviceList.get(position);
         boolean deviceStatus = dataItem.getDeviceStatus().equals("online");
@@ -111,6 +111,8 @@ public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.My
                 }
                 holder.deviceHumidLabel.setVisibility(View.VISIBLE);
                 holder.deviceHumid.setVisibility(View.VISIBLE);
+                holder.deviceGas.setVisibility(View.GONE);
+                holder.deviceGasLable.setVisibility(View.GONE);
                 if (dataItem.getTemp() != null) {
                     holder.deviceTemp.setText(dataItem.getTemp() + context.getResources().getString(R.string.degree_cel));
                 } else {
@@ -128,10 +130,15 @@ public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.My
                 if (!deviceStatus) {
                     holder.deviceImage.setImageResource(R.drawable.ic_temp_offline_svg);
                 }
-                holder.deviceHumidLabel.setVisibility(View.GONE);
-                holder.deviceHumid.setVisibility(View.GONE);
-                holder.deviceTempLable.setText(R.string.gas_label);
+                holder.deviceHumidLabel.setVisibility(View.VISIBLE);
+                holder.deviceHumid.setVisibility(View.VISIBLE);
+                holder.deviceTempLable.setVisibility(View.VISIBLE);
+                holder.deviceTemp.setVisibility(View.VISIBLE);
+                holder.deviceGas.setVisibility(View.VISIBLE);
+                holder.deviceGasLable.setVisibility(View.VISIBLE);
                 holder.deviceTemp.setText(dataItem.getTemp() + context.getResources().getString(R.string.degree_cel));
+                holder.deviceHumid.setText(dataItem.getHumid() + context.getResources().getString(R.string.percent));
+                holder.deviceGas.setText(dataItem.getGas() + context.getResources().getString(R.string.ppm_value));
                 break;
             case 5:
                 Log.i(TAG, "Sensor Gyro");
@@ -322,9 +329,10 @@ public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.My
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView deviceName, deviceId, escalationLevel, deviceTemp, deviceHumid, deviceBattery;
+        public TextView deviceName, deviceId, escalationLevel, deviceTemp, deviceHumid, deviceBattery,deviceGas;
         public TextView deviceHumidLabel;
         public TextView deviceTempLable;
+        public TextView deviceGasLable;
         public TextView timestampValue;
         public ImageView deviceImage,iv_icon_settings;
         public Button analysisButton;
@@ -339,8 +347,10 @@ public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.My
             deviceId = itemView.findViewById(R.id.tv_device_id);
             escalationLevel = itemView.findViewById(R.id.tv_escalation_value);
             deviceTemp = itemView.findViewById(R.id.tv_temp_value);
+            deviceGas = itemView.findViewById(R.id.tv_gas_value);
             deviceHumid = itemView.findViewById(R.id.tv_humid_value);
             deviceTempLable = itemView.findViewById(R.id.tv_temp_label);
+            deviceGasLable = itemView.findViewById(R.id.tv_gas_label);
             deviceBattery = itemView.findViewById(R.id.tv_battery_value);
             deviceHumidLabel = itemView.findViewById(R.id.tv_humid_label);
             timestampValue = itemView.findViewById(R.id.tv_timestamp_value);

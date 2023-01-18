@@ -22,6 +22,9 @@ public class DataItem implements Parcelable {
 	@SerializedName("cap")
 	private String cap;
 
+	@SerializedName("gas")
+	private String gas;
+
 	@SerializedName("device_id")
 	private String deviceId;
 
@@ -46,6 +49,7 @@ public class DataItem implements Parcelable {
 		temp = in.readString();
 		deviceName = in.readString();
 		cap = in.readString();
+		gas = in.readString();
 		deviceId = in.readString();
 		escalation = in.readInt();
 		humid = in.readString();
@@ -86,6 +90,10 @@ public class DataItem implements Parcelable {
 		return cap;
 	}
 
+	public String getGas(){
+		return gas;
+	}
+
 	public String getDeviceId(){
 		return deviceId;
 	}
@@ -122,6 +130,7 @@ public class DataItem implements Parcelable {
 		parcel.writeString(temp);
 		parcel.writeString(deviceName);
 		parcel.writeString(cap);
+		parcel.writeString(gas);
 		parcel.writeString(deviceId);
 		parcel.writeInt(escalation);
 		parcel.writeString(humid);

@@ -3,8 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../layout/custom_preview.xml" value="0.3731481481481482" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.336" />
         <entry key="app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.142" />
+        <entry key="app/src/main/res/drawable/ic_humid_offline_scg.xml" value="0.2015" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.336" />
+        <entry key="app/src/main/res/drawable/ic_temp_offline_svg.xml" value="0.2015" />
+        <entry key="app/src/main/res/drawable/ic_temp_online_svg.xml" value="0.2015" />
+        <entry key="app/src/main/res/drawable/ic_wifi_signal_white_svg.xml" value="0.2" />
+        <entry key="app/src/main/res/drawable/ic_wifi_svg.xml" value="0.2015" />
         <entry key="app/src/main/res/layout/activity_add_device.xml" value="0.19375" />
+        <entry key="app/src/main/res/layout/activity_analysis.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/activity_configure_wi_fi.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/activity_settings.xml" value="0.2" />
@@ -19,7 +28,11 @@
         <entry key="app/src/main/res/layout/fragment_user.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/layout_drawer.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/rv_device_status_layout.xml" value="0.19375" />
+        <entry key="app/src/main/res/menu/menu_toolbar_analysis_layout.xml" value="0.35625" />
         <entry key="app/src/main/res/menu/menu_toolbar_logout.xml" value="0.19375" />
+        <entry key="app/src/main/res/menu/nav_menu.xml" value="0.35625" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.336" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.336" />
       </map>
     </option>
   </component>

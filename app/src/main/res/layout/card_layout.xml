@@ -164,7 +164,7 @@
                         android:paddingEnd="4dp"
                         android:text="@string/temp_value"
                         android:textColor="@color/text_color_dark_87"
-                        android:textSize="24sp" />
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/tv_temp_label"
@@ -186,18 +186,18 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/tv_temp_value_1"
+                        android:id="@+id/tv_gas_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/temp_value"
+                        android:text="@string/gas_value"
                         android:textColor="@color/text_color_dark_87"
-                        android:textSize="24sp" />
+                        android:textSize="18sp" />
 
                     <TextView
-                        android:id="@+id/tv_temp_label_1"
+                        android:id="@+id/tv_gas_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/temp_label"
+                        android:text="@string/gas_label"
                         android:textColor="@color/text_color_dark_60"
                         android:textSize="10sp"
                         />
@@ -211,17 +211,13 @@
                 android:gravity="center"
                 android:layout_weight="1"
                 android:orientation="vertical">
-
-
-
-
             <TextView
                 android:id="@+id/tv_humid_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/humid_value"
                 android:textColor="@color/text_color_dark_87"
-                android:textSize="24sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/tv_humid_label"
@@ -232,6 +228,7 @@
                 android:textSize="10sp"
                 />
             </LinearLayout>
+
             </LinearLayout>
             <ImageView
                 android:id="@+id/iv_icon_settings"

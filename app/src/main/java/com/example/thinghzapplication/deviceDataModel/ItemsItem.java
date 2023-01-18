@@ -16,6 +16,9 @@ public class ItemsItem{
 	@SerializedName("humid")
 	private String humid;
 
+	@SerializedName("gas")
+	private String gas;
+
 	@SerializedName("battery")
 	private String battery;
 
@@ -36,6 +39,10 @@ public class ItemsItem{
 
 	public String getHumid(){
 		return humid;
+	}
+
+	public String getGas(){
+		return gas;
 	}
 
 	public String getBattery(){

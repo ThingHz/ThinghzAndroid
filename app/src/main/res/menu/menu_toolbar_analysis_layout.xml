@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".AnalysisActivity">
+
+
+    <item
+        android:id="@+id/item_chart_select"
+        android:orderInCategory="400"
+        android:title="@string/select_Graph"
+        android:icon="@drawable/ic_baseline_addchart_24"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/item_2_hour"
+        android:orderInCategory="300"
+        android:title="@string/two_hour_menuitem"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/item_12_hour"
+        android:title="@string/tweleve_hour_menuitem"
+        app:showAsAction="always"
+        android:orderInCategory="200"/>
+
+    <item
+        android:id="@+id/item_24_hour"
+        android:orderInCategory="100"
+        android:title="@string/twentyfour_hour_menuitem"
+        app:showAsAction="always" />
+
+</menu>
