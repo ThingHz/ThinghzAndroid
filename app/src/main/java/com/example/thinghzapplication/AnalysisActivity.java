@@ -109,13 +109,14 @@ public class AnalysisActivity extends AppCompatActivity  {
         cartesian.crosshair().enabled(true);
         cartesian.crosshair()
                 .yLabel(true)
-                // TODO ystroke
                 .yStroke((Stroke) null, null, null, (String) null, (String) null);
 
         cartesian.tooltip().positionMode(TooltipPositionMode.POINT);
 
-        cartesian.title("Temperature, Humidity and CO2 Graph");
-
+        cartesian.title("Temperature, Humidity and Co2 Graph");
+        cartesian.xScroller(true);
+        cartesian.xScroller().maxHeight(35);
+        cartesian.xScroller().minHeight(5);
         cartesian.yAxis(0).title("temperature, humidity and CO2");
         cartesian.xAxis(0).labels().padding(4d, 4d, 4d, 4d);
         set = Set.instantiate();
@@ -149,7 +150,7 @@ public class AnalysisActivity extends AppCompatActivity  {
 
 
         Line series3 = cartesian.line(series3Mapping);
-        series3.name("Gas");
+        series3.name("CO2");
         series3.hovered().markers().enabled(true);
         series3.hovered().markers()
                 .type(MarkerType.CIRCLE)
@@ -162,8 +163,12 @@ public class AnalysisActivity extends AppCompatActivity  {
 
 
         cartesian.legend().enabled(true);
-        cartesian.legend().fontSize(4d);
-        cartesian.legend().padding(0d, 0d, 5d, 0d);
+        cartesian.legend().fontSize(14d);
+        cartesian.legend().padding(5d, 5d, 5d, 5d);
+        cartesian.legend().background().enabled(true);
+        cartesian.legend().background().fill("#96a6a6 0.3").stroke("#96a6a6").corners(5).cornerType("round");;
+
+
 
         anyChartView.setChart(cartesian);
     }
@@ -209,33 +214,6 @@ public class AnalysisActivity extends AppCompatActivity  {
                 is12hSelected = false;
                 retrofitUpdateData(deviceId,userAuth.getAuthToken(),is2hSelected,is12hSelected,is24hSelected);
                 return true;
-            case R.id.item_chart_select:
-                alertbuilder.setCancelable(true).setTitle("Select Chart type");
-                alertbuilder.setSingleChoiceItems(R.array.graph_entries, -1, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        switch(i){
-                            case 0:
-                                Toast.makeText(AnalysisActivity.this,"temperature selected", Toast.LENGTH_SHORT).show();
-                                break;
-                            case 1:
-                                Toast.makeText(AnalysisActivity.this,"humidity selected", Toast.LENGTH_SHORT).show();
-                                break;
-                            case 2:
-                                Toast.makeText(AnalysisActivity.this,"CO2 selected", Toast.LENGTH_SHORT).show();
-                                break;
-                            case 3:
-                                Toast.makeText(AnalysisActivity.this,"temperature and Humidity selected", Toast.LENGTH_SHORT).show();
-                                break;
-                            case 4:
-                                Toast.makeText(AnalysisActivity.this,"Combined selected", Toast.LENGTH_SHORT).show();
-                                break;
-                        }
-                    }
-                });
-                AlertDialog alert = alertbuilder.create();
-                alert.show();
-
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -267,25 +245,25 @@ public class AnalysisActivity extends AppCompatActivity  {
     private void retrofitUpdateData(String device_id,String authToken,boolean is2hSelected, boolean is12hSelected, boolean is24hSelected) {
         Call<DeviceDataRoot> deviceDataRootCall = null;
         if(is2hSelected){
-             deviceDataRootCall = getDeviceDataForGraph.getResponse(device_id,authToken,8);
+             deviceDataRootCall = getDeviceDataForGraph.getResponse(device_id,authToken,12);
              seriesData.clear();
              set.data(seriesData);
             progressBar.setVisibility(View.VISIBLE);
         }
         else if(is12hSelected){
-             deviceDataRootCall = getDeviceDataForGraph.getResponse(device_id,authToken,48);
+             deviceDataRootCall = getDeviceDataForGraph.getResponse(device_id,authToken,72);
             seriesData.clear();
             set.data(seriesData);
             progressBar.setVisibility(View.VISIBLE);
         }
         else if(is24hSelected){
-             deviceDataRootCall = getDeviceDataForGraph.getResponse(device_id,authToken,96);
+             deviceDataRootCall = getDeviceDataForGraph.getResponse(device_id,authToken,144);
             seriesData.clear();
             set.data(seriesData);
             progressBar.setVisibility(View.VISIBLE);
         }
         else{
-            deviceDataRootCall = getDeviceDataForGraph.getResponse(device_id,authToken,8);
+            deviceDataRootCall = getDeviceDataForGraph.getResponse(device_id,authToken,12);
         }
         deviceDataRootCall.enqueue(new Callback<DeviceDataRoot>() {
             @Override

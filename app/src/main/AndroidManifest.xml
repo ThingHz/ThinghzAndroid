@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -28,8 +28,7 @@
             android:name=".UserActivity"
             android:screenOrientation="portrait"
             android:theme="@style/addDeviceStyle" /> <!-- android:networkSecurityConfig="@xml/network_security_config" -->
-        <activity android:name=".BluetoothActivity"></activity>
-        <!-- android:networkSecurityConfig="@xml/network_security_config" -->
+        <activity android:name=".BluetoothActivity" /> <!-- android:networkSecurityConfig="@xml/network_security_config" -->
         <activity
             android:name=".ConfigureWiFiActivity"
             android:screenOrientation="portrait"
@@ -62,7 +61,6 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
     </application>
 
 </manifest>

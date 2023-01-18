@@ -5,12 +5,6 @@
     tools:context=".AnalysisActivity">
 
 
-    <item
-        android:id="@+id/item_chart_select"
-        android:orderInCategory="400"
-        android:title="@string/select_Graph"
-        android:icon="@drawable/ic_baseline_addchart_24"
-        app:showAsAction="always" />
 
     <item
         android:id="@+id/item_2_hour"
