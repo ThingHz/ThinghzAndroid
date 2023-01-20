@@ -22,29 +22,38 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".SettingsActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/addDeviceStyle" />
         <activity
             android:name=".UserActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/addDeviceStyle" /> <!-- android:networkSecurityConfig="@xml/network_security_config" -->
-        <activity android:name=".BluetoothActivity" /> <!-- android:networkSecurityConfig="@xml/network_security_config" -->
+            android:exported="false"
+            android:theme="@style/addDeviceStyle" />
+        <!-- android:networkSecurityConfig="@xml/network_security_config" -->
+        <activity android:name=".BluetoothActivity"
+            android:exported="false"/> <!-- android:networkSecurityConfig="@xml/network_security_config" -->
         <activity
             android:name=".ConfigureWiFiActivity"
             android:screenOrientation="portrait"
+            android:exported="false"
             android:theme="@style/addDeviceStyle" />
         <activity
             android:name=".AnalysisActivity"
+            android:exported="false"
             android:screenOrientation="landscape" />
         <activity
             android:name=".AddDeviceActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/addDeviceStyle" />
         <activity
             android:name=".MainActivity"
+            android:exported="false"
             android:screenOrientation="portrait" />
         <activity
             android:name=".NavigationActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

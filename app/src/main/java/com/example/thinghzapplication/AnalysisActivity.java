@@ -45,7 +45,6 @@ import com.example.thinghzapplication.retrofitInterface.GetdeviceData;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
@@ -245,35 +244,26 @@ public class AnalysisActivity extends AppCompatActivity  {
 
     private void retrofitUpdateData(String device_id,String authToken,boolean is2hSelected, boolean is12hSelected, boolean is24hSelected) {
         Call<DeviceDataRoot> deviceDataRootCall = null;
-        long currentTime = Calendar.getInstance().getTimeInMillis()/1000;
-        Log.i(TAG, "current Time now: "+ currentTime);
         if(is2hSelected){
-             long startTimestamp = currentTime - 7200;
-             Log.i(TAG, "start Time 2h: "+ startTimestamp);
-             deviceDataRootCall = getDeviceDataForGraph.getResponse(device_id,authToken,24);
+             deviceDataRootCall = getDeviceDataForGraph.getResponse(device_id,authToken,12);
              seriesData.clear();
              set.data(seriesData);
             progressBar.setVisibility(View.VISIBLE);
         }
         else if(is12hSelected){
-            long startTimestamp = currentTime - 43200;
-            Log.i(TAG, "start Time 12h: "+ startTimestamp);
-            deviceDataRootCall = getDeviceDataForGraph.getResponse(device_id,authToken,144);
+             deviceDataRootCall = getDeviceDataForGraph.getResponse(device_id,authToken,72);
             seriesData.clear();
             set.data(seriesData);
             progressBar.setVisibility(View.VISIBLE);
         }
         else if(is24hSelected){
-            long startTimestamp = currentTime - 86400;
-            Log.i(TAG, "start Time 24h: "+ startTimestamp);
-            deviceDataRootCall = getDeviceDataForGraph.getResponse(device_id,authToken,288);
+             deviceDataRootCall = getDeviceDataForGraph.getResponse(device_id,authToken,144);
             seriesData.clear();
             set.data(seriesData);
             progressBar.setVisibility(View.VISIBLE);
         }
         else{
-            long startTimestamp = currentTime - 7200;
-            deviceDataRootCall = getDeviceDataForGraph.getResponse(device_id,authToken,24);
+            deviceDataRootCall = getDeviceDataForGraph.getResponse(device_id,authToken,12);
         }
         deviceDataRootCall.enqueue(new Callback<DeviceDataRoot>() {
             @Override

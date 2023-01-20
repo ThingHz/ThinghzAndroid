@@ -2,15 +2,16 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    compileSdkVersion 33
+    buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.example.thinghzapplication"
         minSdkVersion 29
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        targetSdkVersion 33
+
+        versionCode 2
+        versionName "1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -50,21 +51,21 @@ dependencies {
     implementation 'androidx.annotation:annotation:1.2.0'
     implementation 'com.budiyev.android:code-scanner:2.1.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    implementation 'androidx.navigation:navigation-fragment:2.1.0'
+    implementation 'androidx.navigation:navigation-fragment:2.5.3'
     implementation 'com.google.code.gson:gson:2.8.6'
-    implementation 'androidx.navigation:navigation-ui:2.3.5'
-    implementation "androidx.navigation:navigation-fragment:2.3.5"
+    implementation 'androidx.navigation:navigation-ui:2.5.3'
+    implementation "androidx.navigation:navigation-fragment:2.5.3"
     implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
-    implementation 'com.google.firebase:firebase-messaging:22.0.0'
+    implementation 'androidx.coordinatorlayout:coordinatorlayout:1.2.0'
+    implementation 'com.google.firebase:firebase-messaging:23.1.1'
     testImplementation 'junit:junit:4.12'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     implementation 'org.altbeacon:android-beacon-library:2.17.1'
     implementation 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.1'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    compileOnly 'com.google.android.wearable:wearable:2.8.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    compileOnly 'com.google.android.wearable:wearable:2.9.0'
     implementation 'com.auth0.android:jwtdecode:2.0.0'
 
 }
