@@ -22,9 +22,11 @@
     <string name="add">ADD</string>
     <string name="percent">%</string>
     <string name="degree_cel">°C</string>
+    <string name="lux_value">lx</string>
     <string name="ppm_value">ppm</string>
     <string name="gas_label">CO2</string>
     <string name="accel_label">Accel</string>
+    <string name="lux_label">Lux</string>
     <string name="gyro_label">Gyro</string>
     <string name="open">open</string>
     <string name="close">close</string>
@@ -36,6 +38,20 @@
     <string name="min_humid">Min Temp</string>
     <string name="max_gas">Max Temp</string>
     <string name="min_gas">Min Temp</string>
+    <string name="pdf_header">REPORT</string>
+    <string name="light_state_label">Light State</string>
+    <string name="light_init_label">Light Intensity</string>
+    <string name="mqtt_connection_status">MQTT Connecting…</string>
+    <string name="light_on_event_hint">pick time for light on event</string>
+    <string name="light_off_event_hint">pick time for light off event</string>
+    <string name="light_1">Light 1</string>
+    <string name="light_2">Light 2</string>
+    <string name="update_light_settings">Update light Settings</string>
+    <string name="connect_to_mqtt">Connect to device</string>
+    <string name="mqtt_reconnection_status">Reconnecting</string>
+    <string name="mqtt_disconnected_status">Disconnected</string>
+
+
 
     <string-array name="max_Temp_enteries">
         <item>12</item>
@@ -184,4 +200,5 @@
     <string name="gas_value">400</string>
     <string name="msg_token_fmt">token</string>
     <string name="dash">-</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>

@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LightActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="16dp">
+
+        <TextView
+            android:id="@+id/tv_light_event_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Schedule Light Events"
+            android:textSize="20sp"
+            android:textColor="@color/text_color_dark_87"
+            android:textStyle="bold"
+            />
+        <Button
+            android:id="@+id/bt_mqtt_connect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="40dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:elevation="5dp"
+            android:paddingVertical="10dp"
+            android:text="@string/connect_to_mqtt"
+            android:textColor="@color/text_color_light"
+            app:rippleColor="@color/text_color_light" />
+        <TextView
+            android:id="@+id/tv_mqtt_connect_status"
+            style="@style/Widget.AppCompat.TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:layout_marginHorizontal="20dp"
+            android:text="@string/mqtt_connection_status"
+            android:textColor="@color/text_color_dark_60"
+            android:textSize="12sp" />
+        <CheckBox
+            android:id="@+id/cb_update_light_event"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Update Light Events"
+            android:textSize="14sp"
+            android:textColor="@color/text_color_dark_60"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:background = "@drawable/layout_background_shape"
+            android:id="@+id/ll_time_pick"
+            android:layout_marginHorizontal="12dp"
+            android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_time_event_on_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:text="@string/light_on_event_hint"
+                android:textColor="@color/text_color_light"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/iv_pick_time_on"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:src="@drawable/ic_time_svg"
+                app:tint="@color/icon_color_primary" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_time_event_off_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:text="@string/light_off_event_hint"
+                android:textColor="@color/text_color_light"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/iv_pick_time_off"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:src="@drawable/ic_time_svg"
+                app:tint="@color/icon_color_primary" />
+
+        </LinearLayout>
+        </LinearLayout>
+        <CheckBox
+            android:id="@+id/cb_delete_light_event"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Delete Light Events"
+            android:textSize="14sp"
+            android:textColor="@color/text_color_dark_60"
+            />
+
+        <TextView
+            android:id="@+id/tv_light_1_title"
+            style="@style/Widget.AppCompat.TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="@string/light_1"
+            android:textColor="@color/text_color_dark_87"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/layout_light"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal"
+            android:weightSum="3">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/sw_light1_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:padding="4dp"
+                    android:text="@string/light_state_label"
+                    android:textColor="@color/text_color_dark_60"
+                    android:textSize="14sp" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_light1_init_label"
+                    style="@style/Widget.AppCompat.TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:text="@string/light_init_label"
+                    android:textColor="@color/text_color_dark_60"
+                    android:textSize="14sp" />
+
+                <SeekBar
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:id="@+id/sb_light1_int"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_light_2_title"
+            style="@style/Widget.AppCompat.TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="@string/light_2"
+            android:textColor="@color/text_color_dark_87"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/layout_light2"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal"
+            android:weightSum="3">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/sw_light2_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:padding="4dp"
+                    android:text="@string/light_state_label"
+                    android:textColor="@color/text_color_dark_60"
+                    android:textSize="14sp" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_light2_init_label"
+                    style="@style/Widget.AppCompat.TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:text="@string/light_init_label"
+                    android:textColor="@color/text_color_dark_60"
+                    android:textSize="14sp" />
+
+                <SeekBar
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:id="@+id/sb_light2_int"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+        <Button
+            android:id="@+id/bt_light_update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="40dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:elevation="5dp"
+            android:paddingVertical="10dp"
+            android:text="@string/update_light_settings"
+            android:textColor="@color/text_color_light"
+            app:rippleColor="@color/text_color_light" />
+
+        <ProgressBar
+            android:id="@+id/light_progress_bar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/colorPrimary"
+            android:indeterminateTintMode="src_atop"
+            android:progressTint="@color/colorPrimary" />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

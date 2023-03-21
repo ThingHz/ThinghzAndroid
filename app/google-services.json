@@ -7,12 +7,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:948122142799:android:fc6acb62a9b216d6c1023a",
+        "mobilesdk_app_id": "1:948122142799:android:d2932a1f9d0dab16c1023a",
         "android_client_info": {
-          "package_name": "com.example.thinghzapplication"
+          "package_name": "com.thinghz.thinghzapplication"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "948122142799-05j7m87c8cjqrjk3hp0uh71h72gpho8d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.thinghz.thinghzapplication",
+            "certificate_hash": "05b2a52150fff6533844d4cadfd8aea29d78cd94"
+          }
+        },
         {
           "client_id": "948122142799-gi5ikb93ff8caalmqcc9o3prnjrcpohi.apps.googleusercontent.com",
           "client_type": 3

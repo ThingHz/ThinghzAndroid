@@ -5,22 +5,32 @@
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.3731481481481482" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.336" />
+        <entry key="app/src/main/res/drawable/ic_baseline_edit_24.xml" value="0.336" />
+        <entry key="app/src/main/res/drawable/ic_baseline_highlight_24.xml" value="0.336" />
         <entry key="app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.142" />
         <entry key="app/src/main/res/drawable/ic_humid_offline_scg.xml" value="0.2015" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.336" />
+        <entry key="app/src/main/res/drawable/ic_light_svg.xml" value="0.336" />
+        <entry key="app/src/main/res/drawable/ic_qr_code_svg.xml" value="0.336" />
+        <entry key="app/src/main/res/drawable/ic_settings_svg.xml" value="0.336" />
         <entry key="app/src/main/res/drawable/ic_temp_offline_svg.xml" value="0.2015" />
         <entry key="app/src/main/res/drawable/ic_temp_online_svg.xml" value="0.2015" />
+        <entry key="app/src/main/res/drawable/ic_time_svg.xml" value="0.336" />
         <entry key="app/src/main/res/drawable/ic_wifi_signal_white_svg.xml" value="0.2" />
         <entry key="app/src/main/res/drawable/ic_wifi_svg.xml" value="0.2015" />
+        <entry key="app/src/main/res/drawable/layout_background_shape.xml" value="0.336" />
         <entry key="app/src/main/res/layout/activity_add_device.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/activity_analysis.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_analysis2.xml" value="0.19791666666666666" />
+        <entry key="app/src/main/res/layout/activity_bluetooth.xml" value="0.16614583333333333" />
         <entry key="app/src/main/res/layout/activity_configure_wi_fi.xml" value="0.19375" />
+        <entry key="app/src/main/res/layout/activity_generate_report.xml" value="0.35625" />
+        <entry key="app/src/main/res/layout/activity_light.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19375" />
-        <entry key="app/src/main/res/layout/activity_settings.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/activity_settings.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_user.xml" value="0.17864583333333334" />
         <entry key="app/src/main/res/layout/app_bar_main.xml" value="0.19375" />
-        <entry key="app/src/main/res/layout/card_layout.xml" value="0.19375" />
+        <entry key="app/src/main/res/layout/card_layout.xml" value="0.33" />
         <entry key="app/src/main/res/layout/drawer_content_main.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/fragment_add_device_bottom_sheet.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/fragment_devices_recycle.xml" value="0.19375" />
@@ -29,6 +39,7 @@
         <entry key="app/src/main/res/layout/fragment_user.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/layout_drawer.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/rv_device_status_layout.xml" value="0.19375" />
+        <entry key="app/src/main/res/layout/rv_sensor_profile_layout.xml" value="0.25" />
         <entry key="app/src/main/res/menu/menu_toolbar_analysis_layout.xml" value="0.35625" />
         <entry key="app/src/main/res/menu/menu_toolbar_logout.xml" value="0.19375" />
         <entry key="app/src/main/res/menu/nav_menu.xml" value="0.35625" />
@@ -42,5 +53,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.35625" />
+      </ProjectState>
+    </option>
   </component>
 </project>

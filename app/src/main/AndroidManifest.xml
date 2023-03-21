@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.thinghzapplication">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.thinghz.thinghzapplication">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -9,7 +10,9 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission
+        android:name="android.permission.ACCESS_FINE_LOCATION"
+        tools:ignore="CoarseFineLocation" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 
     <application
@@ -21,35 +24,50 @@
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".SettingsActivity"
+            android:name=".LightActivity"
             android:exported="false"
+            android:theme="@style/addDeviceStyle"
+            />
+        <activity
+            android:name=".GenerateReportActivity"
+            android:exported="false"
+            android:theme="@style/addDeviceStyle"/>
+        <!--
+             TODO: Before you run your application, you need a Google Maps API key.
+
+             To get one, follow the directions here:
+
+                https://developers.google.com/maps/documentation/android-sdk/get-api-key
+
+             Once you have your API key (it starts with "AIza"), define a new property in your
+             project's local.properties file (e.g. MAPS_API_KEY=Aiza...), and replace the
+             "YOUR_API_KEY" string in this file with "${MAPS_API_KEY}".
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="YOUR_API_KEY" />
+
+        <activity
+            android:name=".SettingsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/addDeviceStyle" />
         <activity
             android:name=".UserActivity"
             android:screenOrientation="portrait"
-            android:exported="false"
             android:theme="@style/addDeviceStyle" />
-        <!-- android:networkSecurityConfig="@xml/network_security_config" -->
-        <activity android:name=".BluetoothActivity"
-            android:exported="false"/> <!-- android:networkSecurityConfig="@xml/network_security_config" -->
         <activity
             android:name=".ConfigureWiFiActivity"
             android:screenOrientation="portrait"
-            android:exported="false"
             android:theme="@style/addDeviceStyle" />
         <activity
             android:name=".AnalysisActivity"
-            android:exported="false"
             android:screenOrientation="landscape" />
         <activity
             android:name=".AddDeviceActivity"
-            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/addDeviceStyle" />
         <activity
             android:name=".MainActivity"
-            android:exported="false"
             android:screenOrientation="portrait" />
         <activity
             android:name=".NavigationActivity"
@@ -62,14 +80,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <service
-            android:name="com.google.firebase.messaging.FirebaseMessagingService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
     </application>
 
 </manifest>
