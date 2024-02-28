@@ -46,6 +46,8 @@
     <string name="light_off_event_hint">pick time for light off event</string>
     <string name="light_1">Light 1</string>
     <string name="light_2">Light 2</string>
+    <string name="light_3">Light 3</string>
+    <string name="light_4">Light 4</string>
     <string name="update_light_settings">Update light Settings</string>
     <string name="connect_to_mqtt">Connect to device</string>
     <string name="mqtt_reconnection_status">Reconnecting</string>

@@ -52,6 +52,12 @@ public class DataItem implements Parcelable {
 	@SerializedName("light_state_2")
 	private int light_state_2;
 
+	@SerializedName("light_state_3")
+	private int light_state_3;
+
+	@SerializedName("light_state_4")
+	private int light_state_4;
+
 	protected DataItem(Parcel in) {
 		sensorProfile = in.readInt();
 		deviceStatus = in.readString();
@@ -68,6 +74,8 @@ public class DataItem implements Parcelable {
 		timestamp = in.readInt();
 		light_state_1 = in.readInt();
 		light_state_2 = in.readInt();
+		light_state_3 = in.readInt();
+		light_state_4 = in.readInt();
 	}
 
 	public static final Creator<DataItem> CREATOR = new Creator<DataItem>() {
@@ -138,6 +146,10 @@ public class DataItem implements Parcelable {
 
 	public int getLightState2() { return light_state_2; }
 
+	public int getLightState3() { return light_state_3; }
+
+	public int getLightState4() { return light_state_4; }
+
 	@Override
 	public int describeContents() {
 		return 0;
@@ -160,5 +172,7 @@ public class DataItem implements Parcelable {
 		parcel.writeInt(timestamp);
 		parcel.writeInt(light_state_1);
 		parcel.writeInt(light_state_2);
+		parcel.writeInt(light_state_3);
+		parcel.writeInt(light_state_4);
 	}
 }

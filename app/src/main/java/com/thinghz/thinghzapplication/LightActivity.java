@@ -61,9 +61,9 @@ public class LightActivity extends AppCompatActivity {
     private static final String KEYSTORE_PASSWORD = "thinghz";
     // Certificate and key aliases in the KeyStore
     private static final String CERTIFICATE_ID = "thinghz";
-    SeekBar light_seekbar1,light_seekbar2;
+    SeekBar light_seekbar1,light_seekbar2, light_seekbar3,light_seekbar4;
     Button mqtt_connect;
-    SwitchMaterial light_switch1,light_switch2;
+    SwitchMaterial light_switch1,light_switch2, light_switch3, light_switch4;
     CheckBox light_update_checkbox,light_delete_checkbox;
     Button light_update_settings;
     LinearLayout layout_time_picker;
@@ -91,6 +91,8 @@ public class LightActivity extends AppCompatActivity {
 
     int light_state_1 = 0;
     int light_state_2 = 0;
+    int light_state_3 = 0;
+    int light_state_4 = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,14 +105,22 @@ public class LightActivity extends AppCompatActivity {
         light_state_2 = dataItem.getLightState2();
         Log.i(TAG,"Light_State1:"+ light_state_1);
         Log.i(TAG,"Light_State2:"+ light_state_2);
+        light_state_3 = dataItem.getLightState3();
+        light_state_4 = dataItem.getLightState4();
+        Log.i(TAG,"Light_State1:"+ light_state_3);
+        Log.i(TAG,"Light_State2:"+ light_state_4);
         setTitle(deviceName);
         Toast.makeText(LightActivity.this,"light State:"+ light_state_1,Toast.LENGTH_LONG).show();
         SharedPreferanceHelper sharedPreferanceHelper = SharedPreferanceHelper.getInstance(LightActivity.this);
         userAuth = sharedPreferanceHelper.getUserSavedValue();
         light_seekbar1 = findViewById(R.id.sb_light1_int);
         light_seekbar2 = findViewById(R.id.sb_light2_int);
+        light_seekbar3 = findViewById(R.id.sb_light3_int);
+        light_seekbar4 = findViewById(R.id.sb_light4_int);
         light_switch1 = findViewById(R.id.sw_light1_state);
         light_switch2 = findViewById(R.id.sw_light2_state);
+        light_switch3 = findViewById(R.id.sw_light3_state);
+        light_switch4 = findViewById(R.id.sw_light4_state);
         light_update_checkbox = findViewById(R.id.cb_update_light_event);
         light_delete_checkbox = findViewById(R.id.cb_delete_light_event);
         light_update_settings = findViewById(R.id.bt_light_update);
@@ -127,6 +137,8 @@ public class LightActivity extends AppCompatActivity {
         light_update_settings.setVisibility(View.GONE);
         light_switch1.setChecked(light_state_1 != 0);
         light_switch2.setChecked(light_state_2 != 0);
+        light_switch3.setChecked(light_state_3 != 0);
+        light_switch4.setChecked(light_state_4 != 0);
 
         // Initialize the AWS Cognito credentials provider
         credentialsProvider = new CognitoCachingCredentialsProvider(
@@ -369,6 +381,26 @@ public class LightActivity extends AppCompatActivity {
 
             }
         });
+
+        light_switch3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if(!isChecked){
+                    light_state_3 = 0;
+                }else  light_state_3 = 1;
+
+            }
+        });
+
+        light_switch4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if(!isChecked){
+                    light_state_4 = 0;
+                }else  light_state_4 = 1;
+
+            }
+        });
         
         
 
@@ -380,11 +412,13 @@ public class LightActivity extends AppCompatActivity {
                     JSONObject publishObject = new JSONObject();
                     publishObject.put("light_state_1",light_state_1);
                     publishObject.put("light_state_2",light_state_2);
+                    publishObject.put("light_state_3",light_state_3);
+                    publishObject.put("light_state_4",light_state_4);
                     publishObject.put("light_thresh",800);
                     String payloadToPublish = publishObject.toString();
                     String publish_topic = makePublishTopic();
                     Log.i(TAG,"publishing to topic" + publish_topic);
-                    mqttManager.publishString(payloadToPublish,publish_topic , AWSIotMqttQos.QOS0);
+                    mqttManager.publishString(payloadToPublish, publish_topic , AWSIotMqttQos.QOS0);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
