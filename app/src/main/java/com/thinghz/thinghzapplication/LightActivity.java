@@ -15,6 +15,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,6 +29,7 @@ import com.amazonaws.mobileconnectors.iot.AWSIotMqttQos;
 import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.iot.AWSIotClient;
+import com.amazonaws.services.iot.model.AttachPolicyRequest;
 import com.amazonaws.services.iot.model.AttachPrincipalPolicyRequest;
 import com.amazonaws.services.iot.model.CreateKeysAndCertificateRequest;
 import com.amazonaws.services.iot.model.CreateKeysAndCertificateResult;
@@ -43,7 +45,10 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.security.KeyStore;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 import java.util.UUID;
 
 import retrofit2.Retrofit;
@@ -61,16 +66,17 @@ public class LightActivity extends AppCompatActivity {
     private static final String KEYSTORE_PASSWORD = "thinghz";
     // Certificate and key aliases in the KeyStore
     private static final String CERTIFICATE_ID = "thinghz";
-    SeekBar light_seekbar1,light_seekbar2, light_seekbar3,light_seekbar4;
-    Button mqtt_connect;
-    SwitchMaterial light_switch1,light_switch2, light_switch3, light_switch4;
+
+    ToggleButton light_switch1,light_switch2, light_switch3, light_switch4;
     CheckBox light_update_checkbox,light_delete_checkbox;
     Button light_update_settings;
-    LinearLayout layout_time_picker;
-    ImageView light_pick_on_time, light_pick_off_time;
-    TextView light_pick_on_label, light_pick_off_label, tvStatus;
+    LinearLayout layout_time_picker,mqtt_status_layout, layout_schedule_period;
+    ImageView light_pick_on_time, img_inc_temp, img_dec_temp;
+    TextView light_pick_on_label, light_pick_off_label, tvStatus, tvUpdateTime, tvDayPeriod;
     ProgressBar progress_bar;
     private Retrofit retrofit;
+
+    private int currentDayPeriod = 1;
     PublishInterface publishInterface;
     private DataItem dataItem;
     private static String deviceName,deviceId;
@@ -113,32 +119,33 @@ public class LightActivity extends AppCompatActivity {
         Toast.makeText(LightActivity.this,"light State:"+ light_state_1,Toast.LENGTH_LONG).show();
         SharedPreferanceHelper sharedPreferanceHelper = SharedPreferanceHelper.getInstance(LightActivity.this);
         userAuth = sharedPreferanceHelper.getUserSavedValue();
-        light_seekbar1 = findViewById(R.id.sb_light1_int);
-        light_seekbar2 = findViewById(R.id.sb_light2_int);
-        light_seekbar3 = findViewById(R.id.sb_light3_int);
-        light_seekbar4 = findViewById(R.id.sb_light4_int);
-        light_switch1 = findViewById(R.id.sw_light1_state);
-        light_switch2 = findViewById(R.id.sw_light2_state);
-        light_switch3 = findViewById(R.id.sw_light3_state);
-        light_switch4 = findViewById(R.id.sw_light4_state);
+        light_switch1 = findViewById(R.id.tb_light1);
+        light_switch2 = findViewById(R.id.tb_light2);
+        light_switch3 = findViewById(R.id.tb_light3);
+        light_switch4 = findViewById(R.id.tb_light4);
         light_update_checkbox = findViewById(R.id.cb_update_light_event);
         light_delete_checkbox = findViewById(R.id.cb_delete_light_event);
         light_update_settings = findViewById(R.id.bt_light_update);
         layout_time_picker = findViewById(R.id.ll_time_pick);
+        layout_schedule_period = findViewById(R.id.ll_schedule_period);
         light_pick_on_time = findViewById(R.id.iv_pick_time_on);
-        light_pick_off_time = findViewById(R.id.iv_pick_time_off);
+        img_dec_temp = findViewById(R.id.iv_dec_day_period);
+        img_inc_temp = findViewById(R.id.iv_inc_day_period);
+        tvDayPeriod = findViewById(R.id.tv_day_period);
         light_pick_on_label = findViewById(R.id.tv_time_event_on_value);
         light_pick_off_label = findViewById(R.id.tv_time_event_off_value);
         progress_bar = findViewById(R.id.light_progress_bar);
-        mqtt_connect = findViewById(R.id.bt_mqtt_connect);
+        mqtt_status_layout = findViewById(R.id.ll_mqtt_status);
         tvStatus = findViewById(R.id.tv_mqtt_connect_status);
+        tvUpdateTime = findViewById(R.id.tv_update_timestamp);
         progress_bar.setVisibility(View.GONE);
-        layout_time_picker.setVisibility(View.GONE);
+        layout_schedule_period.setVisibility(View.GONE);
         light_update_settings.setVisibility(View.GONE);
         light_switch1.setChecked(light_state_1 != 0);
         light_switch2.setChecked(light_state_2 != 0);
         light_switch3.setChecked(light_state_3 != 0);
         light_switch4.setChecked(light_state_4 != 0);
+        tvDayPeriod.setText(String.valueOf(currentDayPeriod));
 
         // Initialize the AWS Cognito credentials provider
         credentialsProvider = new CognitoCachingCredentialsProvider(
@@ -160,6 +167,7 @@ public class LightActivity extends AppCompatActivity {
         // IoT Client (for creation of certificate if needed)
         mIotAndroidClient = new AWSIotClient(credentialsProvider);
         mIotAndroidClient.setRegion(region);
+        //mIotAndroidClient.setEndpoint("a26dm966t9g0lv-ats.iot.us-east-1.amazonaws.com");
 
 
         try {
@@ -171,7 +179,7 @@ public class LightActivity extends AppCompatActivity {
                     // load keystore from file into memory to pass on connection
                     clientKeyStore = AWSIotKeystoreHelper.getIotKeystore(certificateId,
                             keystorePath, keystoreName, keystorePassword);
-                    mqtt_connect.setEnabled(true);
+                    mqtt_status_layout.setEnabled(true);
                 } else {
                     Log.i(TAG, "Key/cert " + certificateId + " not found in keystore.");
                 }
@@ -214,17 +222,22 @@ public class LightActivity extends AppCompatActivity {
                         // This flow assumes the policy was already created in
                         // AWS IoT and we are now just attaching it to the
                         // certificate.
-                        AttachPrincipalPolicyRequest policyAttachRequest = new AttachPrincipalPolicyRequest();
+
+                        mIotAndroidClient.attachPolicy(new AttachPolicyRequest().withPolicyName(AWS_IOT_POLICY_NAME).withTarget(createKeysAndCertificateResult
+                                .getCertificateArn()));
+
+                        /*AttachPrincipalPolicyRequest policyAttachRequest = new AttachPrincipalPolicyRequest();
                         policyAttachRequest.setPolicyName(AWS_IOT_POLICY_NAME);
                         policyAttachRequest.setPrincipal(createKeysAndCertificateResult
                                 .getCertificateArn());
-                        mIotAndroidClient.attachPrincipalPolicy(policyAttachRequest);
+                        //mIotAndroidClient.attachPolicy(policyAttachRequest);
+                        mIotAndroidClient.attachPrincipalPolicy(policyAttachRequest);*/
 
 
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                mqtt_connect.setEnabled(true);
+                                mqtt_status_layout.setEnabled(true);
                             }
                         });
                     } catch (Exception e) {
@@ -234,87 +247,14 @@ public class LightActivity extends AppCompatActivity {
                     }
                 }
             }).start();
+
+            mqttConnectionThread();
         }
 
-        mqtt_connect.setOnClickListener(new View.OnClickListener() {
+        mqtt_status_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "clientId = " + clientId);
-                try {
-                    if(clientKeyStore != null) {
-                        progress_bar.setVisibility(View.VISIBLE);
-                        mqttManager.connect(clientKeyStore, new AWSIotMqttClientStatusCallback() {
-                            @Override
-                            public void onStatusChanged(final AWSIotMqttClientStatus status,
-                                                        final Throwable throwable) {
-                                Log.d(TAG, "Status = " + status);
-
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        if (status == AWSIotMqttClientStatus.Connecting) {
-                                            tvStatus.setText("Connecting...");
-
-                                        } else if (status == AWSIotMqttClientStatus.Connected) {
-                                            tvStatus.setText("Connected to AWS IoT Endpoint " + CUSTOMER_SPECIFIC_ENDPOINT);
-                                            try {
-                                                String subscribe_topic =  makeSubscribeTopic();
-                                                Log.i(TAG,"Subscribing To Topic"+subscribe_topic);
-                                                mqttManager.subscribeToTopic(subscribe_topic, AWSIotMqttQos.QOS0,
-                                                        new AWSIotMqttNewMessageCallback() {
-                                                            @Override
-                                                            public void onMessageArrived(final String topic, final byte[] data) {
-                                                                runOnUiThread(new Runnable() {
-                                                                    @Override
-                                                                    public void run() {
-                                                                        Log.i(TAG,"data arrived from topic"+topic);
-                                                                        try {
-                                                                            String message = new String(data, "UTF-8");
-                                                                            final JSONObject subObject = new JSONObject(message);
-                                                                            String status = subObject.getString("Status");
-                                                                            Toast.makeText(LightActivity.this,"Light turned "+ status,Toast.LENGTH_LONG).show();
-                                                                            progress_bar.setVisibility(View.GONE);
-                                                                        } catch (UnsupportedEncodingException | JSONException e) {
-                                                                            Toast.makeText(LightActivity.this,"Invalid JSON",Toast.LENGTH_LONG).show();
-                                                                            e.printStackTrace();
-                                                                        }
-
-                                                                    }
-                                                                });
-                                                            }
-                                                        });
-                                            } catch (Exception e) {
-                                                Log.e(TAG, "Subscription error.", e);
-                                            }
-                                            light_update_settings.setVisibility(View.VISIBLE);
-                                            progress_bar.setVisibility(View.GONE);
-                                        } else if (status == AWSIotMqttClientStatus.Reconnecting) {
-                                            progress_bar.setVisibility(View.VISIBLE);
-                                            if (throwable != null) {
-                                                Log.e(TAG, "Connection error.", throwable);
-                                            }
-                                            tvStatus.setText(R.string.mqtt_reconnection_status);
-                                        } else if (status == AWSIotMqttClientStatus.ConnectionLost) {
-                                            progress_bar.setVisibility(View.VISIBLE);
-                                            if (throwable != null) {
-                                                Log.e(TAG, "Connection error.", throwable);
-                                            }
-                                            light_update_settings.setVisibility(View.GONE);
-                                            tvStatus.setText(R.string.mqtt_disconnected_status);
-                                        } else {
-                                            tvStatus.setText(R.string.mqtt_disconnected_status);
-                                        }
-                                    }
-                                });
-                            }
-                        });
-                    }else{
-                        Log.d(TAG, "client key store is empty");
-                    }
-                } catch (final Exception e) {
-                    Log.e(TAG, "Connection error.", e);
-                    tvStatus.setText("Error! " + e.getMessage());
-                }
+                mqttConnectionThread();
             }
         });
 
@@ -322,28 +262,11 @@ public class LightActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if (isChecked){
-                    layout_time_picker.setVisibility(View.VISIBLE);
-                }else layout_time_picker.setVisibility(View.GONE);
+                    layout_schedule_period.setVisibility(View.VISIBLE);
+                }else layout_schedule_period.setVisibility(View.GONE);
             }
         });
-        light_pick_off_time.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Calendar mCurrentTime = Calendar.getInstance();
-                int hour = mCurrentTime.get(Calendar.HOUR_OF_DAY);
-                int minute = mCurrentTime.get(Calendar.MINUTE);
-                TimePickerDialog mTimePickerDialog_light1_off;
-                mTimePickerDialog_light1_off = new TimePickerDialog(LightActivity.this, new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        Log.i(TAG, "Light1 off time = "+ selectedHour + ":" + selectedMinute);
-                        light_pick_off_label.setText(selectedHour + ":" + selectedMinute);
-                    }
-                }, hour,minute,true);
-                mTimePickerDialog_light1_off.setTitle("Pick Light 1 Off Time");
-                mTimePickerDialog_light1_off.show();
-            }
-        });
+
         light_pick_on_time.setOnClickListener(new View.OnClickListener() {
             final Calendar mCurrentTime = Calendar.getInstance();
             final int hour = mCurrentTime.get(Calendar.HOUR_OF_DAY);
@@ -360,6 +283,26 @@ public class LightActivity extends AppCompatActivity {
                 },hour,minute,true);
                 mTimePickerDialog_light1_on.setTitle("Pick Light 1 Off Time");
                 mTimePickerDialog_light1_on.show();
+            }
+        });
+
+        img_inc_temp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(currentDayPeriod<23){
+                    currentDayPeriod ++;
+                    tvDayPeriod.setText(String.valueOf(currentDayPeriod));
+                }
+            }
+        });
+
+        img_dec_temp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(currentDayPeriod>1){
+                    currentDayPeriod --;
+                    tvDayPeriod.setText(String.valueOf(currentDayPeriod));
+                }
             }
         });
 
@@ -434,6 +377,99 @@ public class LightActivity extends AppCompatActivity {
     String makePublishTopic(){
         deviceId = dataItem.getDeviceId();
         return LightActivity.light_topic +deviceId+"/light";
+    }
+
+    void mqttConnectionThread(){
+        Log.d(TAG, "clientId = " + clientId);
+        try {
+            if(clientKeyStore != null) {
+                progress_bar.setVisibility(View.VISIBLE);
+                mqttManager.connect(clientKeyStore, new AWSIotMqttClientStatusCallback() {
+                    @Override
+                    public void onStatusChanged(final AWSIotMqttClientStatus status,
+                                                final Throwable throwable) {
+                        Log.d(TAG, "Status = " + status);
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (status == AWSIotMqttClientStatus.Connecting) {
+
+                                    tvStatus.setText("Connecting...");
+                                    mqtt_status_layout.setBackgroundColor(getResources().getColor(R.color.mqtt_establishing_connection));
+
+                                } else if (status == AWSIotMqttClientStatus.Connected) {
+                                    tvStatus.setText("Connected to AWS IoT Endpoint " + CUSTOMER_SPECIFIC_ENDPOINT);
+                                    mqtt_status_layout.setBackgroundColor(getResources().getColor(R.color.mqtt_connected));
+                                    try {
+                                        String subscribe_topic =  makeSubscribeTopic();
+                                        Log.i(TAG,"Subscribing To Topic"+subscribe_topic);
+                                        mqttManager.subscribeToTopic(subscribe_topic, AWSIotMqttQos.QOS0,
+                                                new AWSIotMqttNewMessageCallback() {
+                                                    @Override
+                                                    public void onMessageArrived(final String topic, final byte[] data) {
+                                                        runOnUiThread(new Runnable() {
+                                                            @Override
+                                                            public void run() {
+                                                                Log.i(TAG,"data arrived from topic"+topic);
+                                                                try {
+                                                                    String message = new String(data, "UTF-8");
+                                                                    Log.i(TAG,"payload: "+message);
+                                                                    final JSONObject subObject = new JSONObject(message);
+                                                                    String status = subObject.getString("Success");
+                                                                    Log.i(TAG,"Success: "+ status);
+                                                                    if(status.equals("true")){
+                                                                        Toast.makeText(LightActivity.this,"Toggle"+ status,Toast.LENGTH_LONG).show();
+                                                                        String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+                                                                        String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+                                                                        tvUpdateTime.setText("Last updated: " + currentTime + " " + currentDate );
+                                                                    }
+                                                                    progress_bar.setVisibility(View.GONE);
+                                                                } catch (UnsupportedEncodingException | JSONException e) {
+                                                                    Toast.makeText(LightActivity.this,"Invalid JSON",Toast.LENGTH_LONG).show();
+                                                                    e.printStackTrace();
+                                                                }
+
+                                                            }
+                                                        });
+                                                    }
+                                                });
+                                    } catch (Exception e) {
+                                        Log.e(TAG, "Subscription error.", e);
+                                    }
+                                    light_update_settings.setVisibility(View.VISIBLE);
+                                    progress_bar.setVisibility(View.GONE);
+                                } else if (status == AWSIotMqttClientStatus.Reconnecting) {
+                                    progress_bar.setVisibility(View.VISIBLE);
+                                    if (throwable != null) {
+                                        Log.e(TAG, "Connection error.", throwable);
+                                    }
+                                    tvStatus.setText(R.string.mqtt_reconnection_status);
+                                    mqtt_status_layout.setBackgroundColor(getResources().getColor(R.color.mqtt_reconnecting));
+                                } else if (status == AWSIotMqttClientStatus.ConnectionLost) {
+                                    progress_bar.setVisibility(View.VISIBLE);
+                                    if (throwable != null) {
+                                        Log.e(TAG, "Connection error.", throwable);
+                                    }
+                                    light_update_settings.setVisibility(View.GONE);
+                                    tvStatus.setText(R.string.mqtt_disconnected_status);
+                                    mqtt_status_layout.setBackgroundColor(getResources().getColor(R.color.mqtt_not_connected));
+                                } else {
+                                    tvStatus.setText(R.string.mqtt_disconnected_status);
+                                    mqtt_status_layout.setBackgroundColor(getResources().getColor(R.color.mqtt_not_connected));
+                                }
+                            }
+                        });
+                    }
+                });
+            }else{
+                Log.d(TAG, "client key store is empty");
+            }
+        } catch (final Exception e) {
+            Log.e(TAG, "Connection error.", e);
+            tvStatus.setText("Error! " + e.getMessage());
+            mqtt_status_layout.setBackgroundColor(getResources().getColor(R.color.mqtt_not_connected));
+        }
     }
 
     @Override

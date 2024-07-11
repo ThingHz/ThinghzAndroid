@@ -5,6 +5,8 @@
     <string name="login_button">Login</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="device_name">Device Name</string>
+    <string name="experiment">Experiment</string>
+    <string name="objective">Objective</string>
     <string name="device_id">THING00001</string>
     <string name="escalation">Escalation</string>
     <string name="battery_value">100%</string>
@@ -48,11 +50,14 @@
     <string name="light_2">Light 2</string>
     <string name="light_3">Light 3</string>
     <string name="light_4">Light 4</string>
+    <string name="shelf_1">Shelf 1</string>
+    <string name="shelf_2">Shelf 2</string>
+    <string name="shelf_3">Shelf 3</string>
+    <string name="shelf_4">Shelf 4</string>
     <string name="update_light_settings">Update light Settings</string>
     <string name="connect_to_mqtt">Connect to device</string>
     <string name="mqtt_reconnection_status">Reconnecting</string>
     <string name="mqtt_disconnected_status">Disconnected</string>
-
 
 
     <string-array name="max_Temp_enteries">
@@ -128,10 +133,12 @@
         <item>500</item>
         <item>600</item>
     </string-array>
+
     <string-array name="device_status_enteries">
         <item>online</item>
         <item>offline</item>
     </string-array>
+
     <string-array name="sensor_profile_enteries">
         <item>Temperature </item>
         <item>Temperature and Humidity </item>
@@ -141,6 +148,7 @@
         <item>Control</item>
         <item>Capacitance</item>
     </string-array>
+
     <string-array name="escalation_enteries">
         <item>0</item>
         <item>1</item>
@@ -156,6 +164,24 @@
         <item>CO2</item>
         <item>temperature and Humidity</item>
         <item>Combined</item>
+    </string-array>
+
+    <string-array name="max_lux_enteries">
+        <item>3000</item>
+        <item>3500</item>
+        <item>4000</item>
+        <item>4500</item>
+        <item>5000</item>
+        <item>5500</item>
+        <item>6000</item>
+    </string-array>
+
+    <string-array name="min_lux_enteries">
+        <item>500</item>
+        <item>1500</item>
+        <item>2000</item>
+        <item>2500</item>
+        <item>3000</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -203,4 +229,29 @@
     <string name="msg_token_fmt">token</string>
     <string name="dash">-</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="device_settings">Device Settings</string>
+    <string name="set_lux_value">set Lux Value</string>
+    <string name="update_experiments">Update experiment</string>
+    <string name="set_lux_manually">Set Lux Manually</string>
+    <string name="update_light_events">Update Light Events</string>
+    <string name="set_schedule_time">Set schedule time</string>
+    <string name="day_period">Day Period (In hr)</string>
+    <string name="_12">12</string>
+    <string name="light_off">Light Off</string>
+    <string name="light_on">Light On</string>
+    <string name="schedule">schedule</string>
+    <string name="delete_light_events">Delete Light Events</string>
+    <string name="pick_interval">Pick Interval</string>
+    <string name="_2_days">2 Days</string>
+    <string name="_1_week">1 Week</string>
+    <string name="_15_days">15 Days</string>
+    <string name="progress">%</string>
+    <string name="pick_device">Pick Device</string>
+    <string name="custom_range">Custom range</string>
+    <string name="pick_start_time_date">Pick Start Time/Date</string>
+    <string name="hh_mm">HH:MM</string>
+    <string name="dd_mm_yyyy">DD-MM-YYYY</string>
+    <string name="share_report">Share Report</string>
+    <string name="max_lux">Max Lux</string>
+    <string name="min_lux">Min Lux</string>
 </resources>

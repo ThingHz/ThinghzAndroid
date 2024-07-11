@@ -1,130 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".UserFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="horizontal"
+        tools:context=".UserFragment"
+        android:layout_margin="2dp"
+        android:background="@drawable/card_preferance">
 
     <ImageView
+        android:layout_width="wrap_content"
         android:id="@+id/iv_user_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="144dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:layout_gravity="center_horizontal"
         android:src="@drawable/ic_user__profile_svg"
-        tools:ignore="ContentDescription" />
+        android:layout_weight="1" />
 
-    <TextView
-        android:id="@+id/tv_userName_value"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/user_name"
-        android:textSize="24sp"
-        android:textColor="@color/text_color_dark_87"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_user_profile" />
+        android:padding="8dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:layout_weight="3">
 
-    <TextView
-        android:id="@+id/tv_role_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="100dp"
-        android:textSize="18sp"
-        android:textColor="@color/text_color_dark_60"
-        android:text="@string/role_label"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_userName_value" />
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal"
+           android:layout_margin="6dp"
+           android:weightSum="2">
 
-    <TextView
-        android:id="@+id/tv_role_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="100dp"
-        android:text="@string/role_value"
-        android:textColor="@color/text_color_dark_87"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/tv_role_label"
-        app:layout_constraintTop_toBottomOf="@+id/tv_userName_value" />
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_weight="1"
+               android:textSize="22sp"
+               android:layout_gravity="start"
+               android:textColor="@color/text_color_light"
+               android:text="Role" />
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_weight="1"
+               android:layout_marginStart="6dp"
+               android:textSize="20sp"
+               android:layout_gravity="center_horizontal"
+               android:textColor="@color/text_color_light_87"
+               android:text="Admin">
+           </TextView>
+       </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="6dp"
+            android:weightSum="2">
 
-    <TextView
-        android:id="@+id/tv_email_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/email_label"
-        android:textColor="@color/text_color_dark_60"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_role_value" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="start"
+                android:textSize="22sp"
+                android:textColor="@color/text_color_light"
+                android:text="User Name" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_userName_value"
+                android:layout_weight="1"
+                android:layout_gravity="center_horizontal"
+                android:textSize="20sp"
+                android:layout_marginStart="6dp"
+                android:textColor="@color/text_color_light_87"
+                android:text="User">
+            </TextView>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="6dp"
+            android:weightSum="2">
 
-    <TextView
-        android:id="@+id/tv_email_value"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/email_value"
-        android:textColor="@color/text_color_dark_87"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/tv_email_label"
-        app:layout_constraintTop_toBottomOf="@+id/tv_role_value" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="22sp"
+                android:layout_gravity="start"
+                android:textColor="@color/text_color_light"
+                android:text="Location" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/tv_location_value"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="6dp"
+                android:textSize="20sp"
+                android:textColor="@color/text_color_light_87"
+                android:text="Admin">
+            </TextView>
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_status_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/status_label"
-        android:textColor="@color/text_color_dark_60"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_email_value" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="8dp"
+            android:weightSum="2">
 
-    <TextView
-        android:id="@+id/tv_status_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/status_value"
-        android:textColor="@color/text_color_dark_87"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/tv_status_label"
-        app:layout_constraintTop_toBottomOf="@+id/tv_email_value" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="22sp"
+                android:layout_gravity="start"
+                android:textColor="@color/text_color_light"
+                android:text="Email" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/tv_email_value"
+                android:layout_marginStart="6dp"
+                android:layout_gravity="center_horizontal"
+                android:textSize="20sp"
+                android:textColor="@color/text_color_light_87"
+                android:text="email">
+            </TextView>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="8dp"
+            android:weightSum="2">
 
-    <TextView
-        android:id="@+id/tv_location_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/location_label"
-        android:textColor="@color/text_color_dark_60"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_status_value" />
-
-    <TextView
-        android:id="@+id/tv_location_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/location_value"
-        android:textColor="@color/text_color_dark_87"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/tv_location_label"
-        app:layout_constraintTop_toBottomOf="@+id/tv_status_value" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="22sp"
+                android:layout_gravity="start"
+                android:textColor="@color/text_color_light"
+                android:text="Status" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp"
+                android:layout_gravity="center_horizontal"
+                android:textSize="20sp"
+                android:textColor="@color/text_color_light_87"
+                android:text="Active"/>
+        </LinearLayout>
+    </LinearLayout>
+    </LinearLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>

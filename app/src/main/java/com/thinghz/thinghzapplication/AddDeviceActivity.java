@@ -111,6 +111,9 @@ public class AddDeviceActivity extends AppCompatActivity implements AddDeviceBot
 
     private void showBottomSheet() {
         AddDeviceBottomSheetFragment addDeviceBottomSheetFragment = AddDeviceBottomSheetFragment.newInstance();
+        Bundle bundle = new Bundle();
+        bundle.putInt("sensor_profile", sensor_profile);
+        addDeviceBottomSheetFragment.setArguments(bundle);
         addDeviceBottomSheetFragment.show(getSupportFragmentManager(), "AddDeviceBottomSheetFragment");
     }
 

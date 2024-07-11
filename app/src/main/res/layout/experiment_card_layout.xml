@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="end"
+    android:layout_margin="5dp"
+    android:padding="10dp"
+    android:id="@+id/cl_experiment_card"
+    app:cardBackgroundColor="@color/icon_color_primary"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp"
+    app:cardMaxElevation="5dp"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/ll_meta_data"
+        android:layout_margin="8dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_shelf_label"
+            android:text="@string/shelf_1"
+            style="@style/Widget.AppCompat.TextView"
+            android:textColor="@color/text_color_dark_87"
+            android:textSize="18sp"
+            android:textStyle="bold">
+        </TextView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edit_text_shelf1_experiment_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:layout_toStartOf="@id/iv_edit_shelf1_experiment"
+            android:hint="@string/experiment"
+            android:inputType="text"
+            android:textColorHint="@color/text_color_dark_87"
+            android:theme="@style/myTextInputLabelAdd"
+            app:boxBackgroundColor="@color/icon_color_primary"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:endIconTint="@color/colorPrimary"
+            app:hintAnimationEnabled="true"
+            app:hintTextColor="@color/text_color_dark_87"
+            app:startIconDrawable="@drawable/ic_experiment"
+            app:startIconTint="@color/colorPrimary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_text_shelf1_experiment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:tag="disable"
+                android:maxLines="1"
+                android:maxLength="15"
+                android:textColor="@color/text_color_dark_87" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/iv_edit_shelf1_experiment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:padding="10dp"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="10dp"
+            android:src="@drawable/ic_baseline_edit_24"
+            app:tint="@color/colorPrimary" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edit_text_shelf1_objective_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginBottom="2dp"
+            android:layout_toLeftOf="@id/iv_edit_shelf1_objective"
+            android:hint="@string/objective"
+            android:inputType="text"
+            android:textColorHint="@color/text_color_dark_87"
+            app:hintTextColor="@color/text_color_dark_87">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_text_shelf1_objective"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:tag="disable"
+                android:textColor="@color/text_color_dark_87" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/iv_edit_shelf1_objective"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:padding="10dp"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="10dp"
+            android:src="@drawable/ic_baseline_edit_24"
+            app:tint="@color/colorPrimary" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:id="@+id/cb_shelf1_lux"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/set_lux_manually"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/et_shelf1_lux"
+                android:layout_weight="3"
+                android:hint="@string/set_lux_value"/>
+    </LinearLayout>
+        <Button
+            android:id="@+id/bt_device_experiment_update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:elevation="5dp"
+            android:paddingVertical="10dp"
+            android:text="@string/update_experiments"
+            android:textColor="@color/text_color_light"
+            app:rippleColor="@color/text_color_light" />
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

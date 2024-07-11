@@ -24,7 +24,7 @@ import com.thinghz.thinghzapplication.deviceModel.UpdateDeviceRequest;
 import com.thinghz.thinghzapplication.loginModel.LoginResponseModel;
 import com.thinghz.thinghzapplication.loginModel.UserAuth;
 import com.thinghz.thinghzapplication.retrofitBuilder.RetrofitApiBuilder;
-import com.thinghz.thinghzapplication.retrofitInterface.AddDeviceInterface;
+import com.thinghz.thinghzapplication.retrofitInterface.UpdateDeviceInterface;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,49 +34,52 @@ import retrofit2.Retrofit;
 public class SettingsActivity extends AppCompatActivity {
 
 
-    Spinner spinner_max_temp,spinner_min_Temp,spinner_max_humidity,spinner_min_humidity,spinner_max_carbon,spinner_min_carbon;
+    Spinner spinner_max_temp,spinner_min_Temp,spinner_max_humidity,spinner_min_humidity;
     ImageView imgEdit;
     private static final String TAG = "SettingsActivity";
     TextInputEditText edit_text_device_name;
-    TextView txt_sensor_profile,tv_max_carbon,tv_min_carbon;
+    TextView txt_sensor_profile;
     Button button_update_device;
-    String max_temp,min_temp,max_humid,min_humid,max_carbon,min_carbon;
-    private DataItem dataItem;
-    AddDeviceInterface addDeviceInterface;
+    String max_temp,min_temp,max_humid,min_humid;
+    UpdateDeviceInterface updateDeviceInterface;
     UserAuth userAuth;
     ProgressBar progress_bar;
+    String deviceId;
+    String deviceName;
+    int sensorProfile;
+    int escalation;
     private Retrofit retrofit;
+
+    int state = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle extras = getIntent().getExtras();
+        deviceId = extras.getString("deviceId");
+        deviceName = extras.getString("deviceName");
+        sensorProfile = extras.getInt("sensorProfile");
+        escalation = extras.getInt("escalation");
+        Log.i(TAG,deviceId);
+        Log.i(TAG,deviceName);
+        Log.i(TAG, String.valueOf(sensorProfile));
         setContentView(R.layout.activity_settings);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Preferences");
         RetrofitApiBuilder retrofitApiBuilder = new RetrofitApiBuilder(retrofit);
         retrofit = retrofitApiBuilder.getRetrofitClient();
-        addDeviceInterface = retrofit.create(AddDeviceInterface.class);
-        dataItem = new Gson().fromJson(getIntent().getStringExtra("DeviceData"),DataItem.class);
+        updateDeviceInterface = retrofit.create(UpdateDeviceInterface.class);
         SharedPreferanceHelper sharedPreferanceHelper = SharedPreferanceHelper.getInstance(this);
         userAuth = sharedPreferanceHelper.getUserSavedValue();
         spinner_max_temp = findViewById(R.id.spinner_max_temp);
         spinner_min_Temp = findViewById(R.id.spinner_min_temp);
         spinner_max_humidity = findViewById(R.id.spinner_max_humidity);
         spinner_min_humidity = findViewById(R.id.spinner_min_humidity);
-        spinner_max_carbon = findViewById(R.id.spinner_max_carbon);
-        spinner_min_carbon = findViewById(R.id.spinner_min_carbon);
-        spinner_min_carbon = findViewById(R.id.spinner_min_carbon);
-        tv_max_carbon = findViewById(R.id.tv_max_carbon);
-        tv_min_carbon = findViewById(R.id.tv_min_carbon);
         imgEdit = findViewById(R.id.imgEdit);
         edit_text_device_name = findViewById(R.id.edit_text_device_name);
         txt_sensor_profile = findViewById(R.id.txt_sensor_profile);
         button_update_device = findViewById(R.id.button_update_device);
-        progress_bar = findViewById(R.id.progress_bar);
-        spinner_min_carbon.setVisibility(View.GONE);
-        spinner_max_carbon.setVisibility(View.GONE);
-        tv_min_carbon.setVisibility(View.GONE);
-        tv_max_carbon.setVisibility(View.GONE);
+        progress_bar = findViewById(R.id.progress_bar_update);
 
         imgEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,10 +98,9 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        if (getIntent().getStringExtra("DeviceData") != null){
-            edit_text_device_name.setText(dataItem.getDeviceName());
-            txt_sensor_profile.setText(String.valueOf(dataItem.getSensorProfile()));
-        }
+        edit_text_device_name.setText(deviceName);
+        txt_sensor_profile.setText(String.valueOf(sensorProfile));
+
 
         ArrayAdapter adapterMaxTemp = ArrayAdapter.createFromResource(this, R.array.max_Temp_enteries, android.R.layout.simple_expandable_list_item_1);
         adapterMaxTemp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -170,43 +172,11 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        ArrayAdapter adapterMaxCarbon = ArrayAdapter.createFromResource(this, R.array.max_carbon_enteries, android.R.layout.simple_expandable_list_item_1);
-        adapterMaxTemp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_max_carbon.setAdapter(adapterMaxCarbon);
-
-        spinner_max_carbon.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
-
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                max_carbon = adapterView.getSelectedItem().toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        ArrayAdapter adapterMinCarbon = ArrayAdapter.createFromResource(this, R.array.min_carbon_enteries, android.R.layout.simple_expandable_list_item_1);
-        adapterMaxTemp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_min_carbon.setAdapter(adapterMinCarbon);
-
-        spinner_min_carbon.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
-
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                min_carbon = adapterView.getSelectedItem().toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
 
         button_update_device.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+               progress_bar.setVisibility(View.VISIBLE);
                updateDevice();
             }
         });
@@ -215,7 +185,6 @@ public class SettingsActivity extends AppCompatActivity {
 
 
     private void updateDevice() {
-        progress_bar.setVisibility(View.VISIBLE);
         UpdateDeviceRequest updateDeviceRequest = new UpdateDeviceRequest();
         updateDeviceRequest.setDeviceName(edit_text_device_name.getText().toString());
         UpdateDeviceRequest.Range range = new UpdateDeviceRequest.Range();
@@ -223,25 +192,22 @@ public class SettingsActivity extends AppCompatActivity {
         range.setMinTemp(min_temp);
         range.setMaxHumid(max_humid);
         range.setMinHumid(min_humid);
-        range.setMaxGas(max_carbon);
-        range.setMinGas(min_carbon);
-
         updateDeviceRequest.setRange(range);
 
         Log.i("UpdateDevice", "updateDevice:"+new Gson().toJson(updateDeviceRequest));
 
-        Call<LoginResponseModel> updateResponseModelCall = addDeviceInterface.updateDevice(userAuth.getAuthToken(),dataItem.getDeviceId(),updateDeviceRequest);
+        Call<LoginResponseModel> updateResponseModelCall = updateDeviceInterface.updateDevice(userAuth.getAuthToken(),deviceId,escalation,updateDeviceRequest);
         updateResponseModelCall.enqueue(new Callback<LoginResponseModel>() {
             @Override
             public void onResponse(Call<LoginResponseModel> call, Response<LoginResponseModel> response) {
-                progress_bar.setVisibility(View.GONE);
                 if (response.code() == 200){
+                    progress_bar.setVisibility(View.GONE);
                     Toast.makeText(SettingsActivity.this, "Device Updated", Toast.LENGTH_SHORT).show();
                     onBackPressed();
                 }
                 else {
                     Toast.makeText(SettingsActivity.this, "Error", Toast.LENGTH_SHORT).show();
-
+                    progress_bar.setVisibility(View.GONE);
                 }
             }
 

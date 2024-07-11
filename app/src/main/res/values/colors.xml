@@ -29,4 +29,9 @@
     <color name="escalation_4">#ff5722</color>
     <color name="escalation_5">#f44336</color>
     <color name="black">#000000</color>
+    <color name="mqtt_not_connected">#f44336</color>
+    <color name="mqtt_connected">#388e3c</color>
+    <color name="mqtt_reconnecting">#006783</color>
+    <color name="mqtt_establishing_connection">#ffc107</color>
+
 </resources>

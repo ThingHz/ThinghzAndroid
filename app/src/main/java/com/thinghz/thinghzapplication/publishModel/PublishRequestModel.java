@@ -29,11 +29,11 @@ public class PublishRequestModel {
     }
 
 
-    public int getLightState_1(){
+    public int getLightState_3(){
         return light_state_3;
     }
 
-    public int getLightState_2(){
+    public int getLightState_4(){
         return light_state_4;
     }
 
@@ -44,8 +44,8 @@ public class PublishRequestModel {
     public PublishRequestModel(int light_state_1, int light_state_2, int light_state_3, int light_state_4, int light_thresh) {
             this.light_state_1 = light_state_1;
             this.light_state_2 = light_state_2;
-            this.light_state_1 = light_state_3;
-            this.light_state_2 = light_state_4;
+            this.light_state_3 = light_state_3;
+            this.light_state_4 = light_state_4;
             this.light_thresh = light_thresh;
            }
 }

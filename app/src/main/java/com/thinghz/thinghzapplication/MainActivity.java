@@ -1,11 +1,9 @@
 package com.thinghz.thinghzapplication;
 
 import android.Manifest;
-import android.annotation.TargetApi;
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -29,15 +27,16 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.thinghz.thinghzapplication.UserAuth.UserAuthModel;
 import com.thinghz.thinghzapplication.Utils.JWTUtils;
 import com.thinghz.thinghzapplication.Utils.KeysUtils;
 import com.thinghz.thinghzapplication.Utils.PermissionUtils;
 import com.thinghz.thinghzapplication.Utils.SharedPreferanceHelper;
 import com.thinghz.thinghzapplication.loginModel.UserAuth;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.json.JSONObject;
 
@@ -47,14 +46,11 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements EscalationListAdapter.RadioEscalationClickListener,
         DeviceStatusListAdapter.RadioDeviceStatusClickListener,
         SensorProfileListAdapter.RadioSensorProfileClickListener {
-
     private static final String TAG = "MainActivity";
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
     private Fragment fragment;
     private static final int CAMERA_PERMISSION_REQUEST = 1003;
-    private static final int ACCESS_WIFI_REQUEST = 1004;
-    private static final int CHANGE_WIFI_REQUEST = 1005;
     private static final int PERMISSION_REQUEST_FINE_LOCATION = 1;
     private static final int PERMISSION_REQUEST_BACKGROUND_LOCATION = 2;
 
@@ -89,23 +85,14 @@ public class MainActivity extends AppCompatActivity implements EscalationListAda
 
         setUpToolbar();
         setUpDrawer();
-        requestPermission();
         PermissionUtils.requestPermission(MainActivity.this,
                 CAMERA_PERMISSION_REQUEST,
                 Manifest.permission.CAMERA);
-        PermissionUtils.requestPermission(MainActivity.this,
-                ACCESS_WIFI_REQUEST,
-                Manifest.permission.ACCESS_WIFI_STATE);
-        PermissionUtils.requestPermission(MainActivity.this,
-                CHANGE_WIFI_REQUEST,
-                Manifest.permission.CHANGE_WIFI_STATE);
-
-
 
         alertbuilder = new AlertDialog.Builder(this);
         all_devices = findViewById(R.id.tv_all_devices);
         dashboard = findViewById(R.id.tv_dashboard);
-        report = findViewById(R.id.tv_download);
+        report = findViewById(R.id.tv_report);
         iv_device_status = findViewById(R.id.iv_drop_down_device_status);
         iv_sensor_profile = findViewById(R.id.iv_drop_down_sensor_profile);
         iv_escalation = findViewById(R.id.iv_drop_down_escalation);
@@ -118,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements EscalationListAda
         try {
             long issuedAt,expireAt;
             jsonString = decodeAuthToken(userAuth.getAuthToken());
+            Log.i(TAG,jsonString);
             JSONObject root = new JSONObject(jsonString);
             userName = root.getJSONObject("user").getString("userName");
             emailId = root.getJSONObject("user").getString("email_id");
@@ -128,6 +116,8 @@ public class MainActivity extends AppCompatActivity implements EscalationListAda
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        dashboard.setVisibility(View.GONE);
 
         all_devices.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -172,9 +162,8 @@ public class MainActivity extends AppCompatActivity implements EscalationListAda
             @Override
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this, "downloading report", Toast.LENGTH_SHORT).show();
-                //Intent intent = new Intent(getApplicationContext(),GenerateReportActivity.class);
-                //startActivity(intent);
-
+                Intent intent = new Intent(getApplicationContext(),GenerateReportActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -262,71 +251,6 @@ public class MainActivity extends AppCompatActivity implements EscalationListAda
         createSensorProfileList();
     }
 
-
-
-    private void requestPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (this.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
-                    == PackageManager.PERMISSION_GRANTED) {
-                if (this.checkSelfPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    if (this.shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_BACKGROUND_LOCATION)) {
-                        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                        builder.setTitle("This app needs background location access");
-                        builder.setMessage("Please grant location access so this app can detect beacons in the background.");
-                        builder.setPositiveButton(android.R.string.ok, null);
-                        builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
-
-                            @TargetApi(23)
-                            @Override
-                            public void onDismiss(DialogInterface dialog) {
-                                requestPermissions(new String[]{Manifest.permission.ACCESS_BACKGROUND_LOCATION},
-                                        PERMISSION_REQUEST_BACKGROUND_LOCATION);
-                            }
-
-                        });
-                        builder.show();
-                    }
-                    else {
-                        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                        builder.setTitle("Functionality limited");
-                        builder.setMessage("Since background location access has not been granted, this app will not be able to discover beacons in the background.  Please go to Settings -> Applications -> Permissions and grant background location access to this app.");
-                        builder.setPositiveButton(android.R.string.ok, null);
-                        builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
-
-                            @Override
-                            public void onDismiss(DialogInterface dialog) {
-                            }
-
-                        });
-                        builder.show();
-                    }
-
-                }
-            } else {
-                if (!this.shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
-                    requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
-                                    Manifest.permission.ACCESS_BACKGROUND_LOCATION},
-                            PERMISSION_REQUEST_FINE_LOCATION);
-                }
-                else {
-                    final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                    builder.setTitle("Functionality limited");
-                    builder.setMessage("Since location access has not been granted, this app will not be able to discover beacons.  Please go to Settings -> Applications -> Permissions and grant location access to this app.");
-                    builder.setPositiveButton(android.R.string.ok, null);
-                    builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
-
-                        @Override
-                        public void onDismiss(DialogInterface dialog) {
-                        }
-
-                    });
-                    builder.show();
-                }
-
-            }
-        }
-    }
 
     public void slideUp(View view){
         TranslateAnimation animate = new TranslateAnimation(
@@ -422,23 +346,6 @@ public class MainActivity extends AppCompatActivity implements EscalationListAda
                 Toast.makeText(MainActivity.this, "Permission granted for Camera", Toast.LENGTH_SHORT).show();
             }
         }*/
-        if(requestCode == ACCESS_WIFI_REQUEST){
-            if (PermissionUtils.permissionGranted(requestCode, ACCESS_WIFI_REQUEST, grantResults)) {
-                Toast.makeText(MainActivity.this, "Permission granted to access wifi state", Toast.LENGTH_SHORT).show();
-            }
-        }
-        if(requestCode == CHANGE_WIFI_REQUEST){
-            if (PermissionUtils.permissionGranted(requestCode, CHANGE_WIFI_REQUEST, grantResults)) {
-                Toast.makeText(MainActivity.this, "Permission granted to change wifi state", Toast.LENGTH_SHORT).show();
-            }
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if(requestCode == PERMISSION_REQUEST_BACKGROUND_LOCATION){
-                if (PermissionUtils.permissionGranted(requestCode, PERMISSION_REQUEST_BACKGROUND_LOCATION, grantResults)) {
-                    Toast.makeText(MainActivity.this, "Permission granted to change wifi state", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }
     }
 
     @Override
@@ -447,6 +354,7 @@ public class MainActivity extends AppCompatActivity implements EscalationListAda
         return true;
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -482,10 +390,6 @@ public class MainActivity extends AppCompatActivity implements EscalationListAda
                 startActivity(intent);
                 break;
             }
-            case R.id.item_wifi:
-                Intent intent = new Intent(getApplicationContext(),ConfigureWiFiActivity.class);
-                startActivity(intent);
-                break;
         }
 
         return super.onOptionsItemSelected(item);
@@ -493,7 +397,8 @@ public class MainActivity extends AppCompatActivity implements EscalationListAda
 
     @Override
     public void onBackPressed() {
-        Log.i(TAG,"back button clicked");
+        super.onBackPressed();
+        Log.i(TAG, "back button clicked");
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
@@ -550,4 +455,6 @@ public class MainActivity extends AppCompatActivity implements EscalationListAda
                 this.sensor_profile = 3; 
         }
     }
+
+
 }

@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LightActivity">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".LightActivity"
+    tools:layout_editor_absoluteX="1dp"
+    tools:layout_editor_absoluteY="1dp">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,23 +24,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Schedule Light Events"
-            android:textSize="20sp"
-            android:textColor="@color/text_color_dark_87"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:layout_margin="10dp"
+            android:textColor="@color/text_color_dark_60"
             android:textStyle="bold"
             />
-        <Button
-            android:id="@+id/bt_mqtt_connect"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="40dp"
-            android:backgroundTint="@color/colorPrimary"
-            android:elevation="5dp"
-            android:paddingVertical="10dp"
-            android:text="@string/connect_to_mqtt"
-            android:textColor="@color/text_color_light"
-            app:rippleColor="@color/text_color_light" />
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="vertical"
+           android:id="@+id/ll_mqtt_status"
+           android:background="@color/mqtt_establishing_connection">
         <TextView
             android:id="@+id/tv_mqtt_connect_status"
             style="@style/Widget.AppCompat.TextView"
@@ -43,20 +45,26 @@
             android:layout_marginHorizontal="20dp"
             android:text="@string/mqtt_connection_status"
             android:textColor="@color/text_color_dark_60"
-            android:textSize="12sp" />
+            android:textSize="20sp" />
+       </LinearLayout>
         <CheckBox
             android:id="@+id/cb_update_light_event"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Update Light Events"
+            android:text="@string/update_light_events"
             android:textSize="14sp"
             android:textColor="@color/text_color_dark_60"
             />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/ll_schedule_period"
+    android:background = "@drawable/layout_background_shape"
+    android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="2"
-            android:background = "@drawable/layout_background_shape"
             android:id="@+id/ll_time_pick"
             android:layout_marginHorizontal="12dp"
             android:orientation="horizontal">
@@ -74,7 +82,8 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="4dp"
                 android:paddingEnd="4dp"
-                android:text="@string/light_on_event_hint"
+                android:paddingTop="10dp"
+                android:text="@string/set_schedule_time"
                 android:textColor="@color/text_color_light"
                 android:textSize="18sp" />
 
@@ -101,17 +110,46 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="4dp"
                 android:paddingEnd="4dp"
-                android:text="@string/light_off_event_hint"
+                android:paddingTop="10dp"
+                android:text="@string/day_period"
                 android:textColor="@color/text_color_light"
                 android:textSize="18sp" />
-
-            <ImageView
-                android:id="@+id/iv_pick_time_off"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:src="@drawable/ic_time_svg"
-                app:tint="@color/icon_color_primary" />
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/iv_dec_day_period"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:src="@drawable/dec_day_period"
+                    app:tint="@color/icon_color_primary" />
+                <TextView
+                    android:id="@+id/tv_day_period"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="24sp"
+                    android:text="@string/_12"
+                    android:textColor="@color/text_color_light"
+                    app:tint="@color/icon_color_primary" />
+                <ImageView
+                    android:id="@+id/iv_inc_day_period"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:src="@drawable/day_period_add"
+                    app:tint="@color/icon_color_primary" />
+            </LinearLayout>
+
+
 
         </LinearLayout>
         </LinearLayout>
@@ -119,55 +157,37 @@
             android:id="@+id/cb_delete_light_event"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Delete Light Events"
+            android:buttonTint="@color/text_color_light_87"
+            android:checked="false"
+            android:text="@string/delete_light_events"
             android:textSize="14sp"
-            android:textColor="@color/text_color_dark_60"
-            />
-
-        <TextView
-            android:id="@+id/tv_light_1_title"
-            style="@style/Widget.AppCompat.TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="4dp"
-            android:text="@string/light_1"
-            android:textColor="@color/text_color_dark_87"
-            android:textSize="18sp"
-            android:textStyle="bold"/>
-
-
+            android:textColor="@color/text_color_light_87"
+        />
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/colorWhite"
+            android:textColor="@color/colorPrimary"
+            android:text="@string/schedule"
+            android:elevation="10dp"
+            app:rippleColor="@color/colorPrimary"
+            android:layout_margin="4dp"/>
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/layout_light"
+            android:id="@+id/layout_light_1"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:orientation="horizontal"
-            android:weightSum="3">
+            android:weightSum="2">
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/sw_light1_state"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:padding="4dp"
-                    android:text="@string/light_state_label"
-                    android:textColor="@color/text_color_dark_60"
-                    android:textSize="14sp" />
-
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -177,62 +197,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="4dp"
-                    android:text="@string/light_init_label"
-                    android:textColor="@color/text_color_dark_60"
-                    android:textSize="14sp" />
+                    android:text="@string/light_1"
+                    android:textColor="@color/text_color_dark_87"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
-                <SeekBar
+                <ToggleButton
+                    android:id="@+id/tb_light1"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:textOff="@string/light_off"
+                    android:textOn="@string/light_on"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="4dp"
-                    android:id="@+id/sb_light1_int"
-                    />
+                    android:layout_height="wrap_content" />
             </LinearLayout>
-        </LinearLayout>
-        <TextView
-            android:id="@+id/tv_light_2_title"
-            style="@style/Widget.AppCompat.TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="4dp"
-            android:text="@string/light_2"
-            android:textColor="@color/text_color_dark_87"
-            android:textSize="18sp"
-            android:textStyle="bold"/>
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/layout_light2"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:orientation="horizontal"
-            android:weightSum="3">
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/sw_light2_state"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:padding="4dp"
-                    android:text="@string/light_state_label"
-                    android:textColor="@color/text_color_dark_60"
-                    android:textSize="14sp" />
-
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -242,63 +225,39 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="4dp"
-                    android:text="@string/light_init_label"
-                    android:textColor="@color/text_color_dark_60"
-                    android:textSize="14sp" />
+                    android:text="@string/light_2"
+                    android:textColor="@color/text_color_dark_87"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
 
-                <SeekBar
+                <ToggleButton
+                    android:id="@+id/tb_light2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="4dp"
-                    android:id="@+id/sb_light2_int"
-                    />
-            </LinearLayout>
-        </LinearLayout>
-        
-        <TextView
-            android:id="@+id/tv_light_3_title"
-            style="@style/Widget.AppCompat.TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="4dp"
-            android:text="@string/light_3"
-            android:textColor="@color/text_color_dark_87"
-            android:textSize="18sp"
-            android:textStyle="bold"/>
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:textOff="Light Off"
+                    android:textOn="Light On" />
 
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/layout_light"
+            android:id="@+id/layout_light_2"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:orientation="horizontal"
-            android:weightSum="3">
+            android:weightSum="2">
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/sw_light3_state"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:padding="4dp"
-                    android:text="@string/light_state_label"
-                    android:textColor="@color/text_color_dark_60"
-                    android:textSize="14sp" />
-
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -308,63 +267,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="4dp"
-                    android:text="@string/light_init_label"
-                    android:textColor="@color/text_color_dark_60"
-                    android:textSize="14sp" />
+                    android:text="@string/light_3"
+                    android:textColor="@color/text_color_dark_87"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
-                <SeekBar
+                <ToggleButton
+                    android:id="@+id/tb_light3"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="4dp"
-                    android:id="@+id/sb_light3_int"
-                    />
+                    android:textOff="Light Off"
+                    android:textOn="Light On"/>
             </LinearLayout>
-        </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_light_4_title"
-            style="@style/Widget.AppCompat.TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="4dp"
-            android:text="@string/light_4"
-            android:textColor="@color/text_color_dark_87"
-            android:textSize="18sp"
-            android:textStyle="bold"/>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/layout_light"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:orientation="horizontal"
-            android:weightSum="3">
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/sw_light4_state"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:padding="4dp"
-                    android:text="@string/light_state_label"
-                    android:textColor="@color/text_color_dark_60"
-                    android:textSize="14sp" />
-
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -374,20 +295,35 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="4dp"
-                    android:text="@string/light_init_label"
-                    android:textColor="@color/text_color_dark_60"
-                    android:textSize="14sp" />
+                    android:text="@string/light_4"
+                    android:textColor="@color/text_color_dark_87"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
 
-                <SeekBar
+                <ToggleButton
+                    android:id="@+id/tb_light4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="4dp"
-                    android:id="@+id/sb_light4_int"
-                    />
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:textOff="Light Off"
+                    android:textOn="Light On"/>
+
+
             </LinearLayout>
+
         </LinearLayout>
-        
-        
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_update_timestamp"
+            android:text="Last Updated:"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:textColor="@color/text_color_dark_60"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
         <Button
             android:id="@+id/bt_light_update"
             android:layout_width="match_parent"
@@ -417,3 +353,5 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

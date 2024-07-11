@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.thinghz.thinghzapplication">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission
-        android:name="android.permission.ACCESS_FINE_LOCATION"
-        tools:ignore="CoarseFineLocation" />
-    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -24,14 +19,17 @@
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Preferance"
+            android:exported="false"
+            android:theme="@style/addDeviceStyle"/>
+        <activity
             android:name=".LightActivity"
             android:exported="false"
-            android:theme="@style/addDeviceStyle"
-            />
+            android:theme="@style/addDeviceStyle" />
         <activity
             android:name=".GenerateReportActivity"
             android:exported="false"
-            android:theme="@style/addDeviceStyle"/>
+            android:theme="@style/addDeviceStyle" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -49,30 +47,30 @@
 
         <activity
             android:name=".SettingsActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="unspecified"
             android:theme="@style/addDeviceStyle" />
         <activity
             android:name=".UserActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="unspecified"
             android:theme="@style/addDeviceStyle" />
         <activity
             android:name=".ConfigureWiFiActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="unspecified"
             android:theme="@style/addDeviceStyle" />
         <activity
             android:name=".AnalysisActivity"
             android:screenOrientation="landscape" />
         <activity
             android:name=".AddDeviceActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="unspecified"
             android:theme="@style/addDeviceStyle" />
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="unspecified" />
         <activity
             android:name=".NavigationActivity"
             android:exported="true"
-            android:screenOrientation="portrait"
+            android:screenOrientation="unspecified"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

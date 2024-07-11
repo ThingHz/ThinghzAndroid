@@ -131,6 +131,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
+        android:id="@+id/ll_carbon_label"
         android:layout_marginEnd="32dp"
         android:orientation="horizontal"
         android:weightSum="2">
@@ -156,6 +157,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:id="@+id/ll_carbon_spinner"
         android:weightSum="2">
 
         <Spinner
@@ -167,6 +169,55 @@
 
         <Spinner
             android:id="@+id/spinner_min_carbon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:dropDownWidth="80dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:orientation="horizontal"
+        android:id="@+id/ll_lux_label"
+        android:weightSum="2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/max_lux"
+            android:textColor="@color/text_color_dark_60"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/min_lux"
+            android:textColor="@color/text_color_dark_60"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/ll_lux_spinner"
+        android:weightSum="2">
+
+        <Spinner
+            android:id="@+id/spinner_max_lux"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:dropDownWidth="80dp" />
+
+        <Spinner
+            android:id="@+id/spinner_min_lux"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

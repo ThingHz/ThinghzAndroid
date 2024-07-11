@@ -13,9 +13,6 @@ public class UpdateDeviceRequest {
     @SerializedName("range")
     @Expose
     private Range range;
-    @SerializedName("location")
-    @Expose
-    private String location;
 
     public String getDeviceName() {
         return deviceName;
@@ -41,13 +38,6 @@ public class UpdateDeviceRequest {
         this.range = range;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
 
     public static class Range {
 
@@ -63,12 +53,6 @@ public class UpdateDeviceRequest {
         @SerializedName("minHumid")
         @Expose
         private String minHumid;
-        @SerializedName("maxGas")
-        @Expose
-        private String maxGas;
-        @SerializedName("minGas")
-        @Expose
-        private String minGas;
 
         public String getMaxTemp() {
             return maxTemp;
@@ -100,22 +84,6 @@ public class UpdateDeviceRequest {
 
         public void setMinHumid(String minHumid) {
             this.minHumid = minHumid;
-        }
-
-        public String getMaxGas() {
-            return maxGas;
-        }
-
-        public void setMaxGas(String maxGas) {
-            this.maxGas = maxGas;
-        }
-
-        public String getMinGas() {
-            return minGas;
-        }
-
-        public void setMinGas(String minGas) {
-            this.minGas = minGas;
         }
     }
 }

@@ -47,6 +47,10 @@ public class KeysUtils {
 
     public static String getMap_max_carbon() { return map_max_carbon; }
 
+    public static String getMap_min_lux() { return map_min_lux; }
+
+    public static String getMap_max_lux() { return map_max_lux; }
+
     public static String getUser_fragment_bundle_userName() { return user_fragment_bundle_userName; }
 
     public static String getUser_fragment_bundle_location() { return user_fragment_bundle_location; }
@@ -80,8 +84,8 @@ public class KeysUtils {
     private static final String map_max_humid = "max_humid";
     private static final String map_min_carbon = "min_carbon";
     private static final String map_max_carbon = "max_carbon";
-
-
+    private static final String map_min_lux = "min_lux";
+    private static final String map_max_lux = "max_lux";
     private static final String user_fragment_bundle_userName = "user_name";
     private static final String user_fragment_bundle_location = "location";
     private static final String user_fragment_bundle_email = "email_id";

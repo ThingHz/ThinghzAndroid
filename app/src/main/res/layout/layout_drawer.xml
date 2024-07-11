@@ -278,24 +278,22 @@
         app:layout_constraintTop_toBottomOf="@+id/button_Filter" />
 
     <TextView
-        android:id="@+id/tv_download"
+        android:id="@+id/tv_report"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
         android:drawablePadding="64dp"
         android:text="@string/download_report"
         android:textColor="@color/text_color_light"
         android:textSize="20sp"
         app:drawableLeftCompat="@drawable/ic_download_svg"
         app:drawableTint="@color/text_color_light_60"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view3" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

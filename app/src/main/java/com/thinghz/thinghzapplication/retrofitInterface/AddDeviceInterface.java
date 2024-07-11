@@ -16,9 +16,4 @@ public interface AddDeviceInterface {
     @POST("v1/device")
     Call<AddDeviceResponseModel> addDevice(@Body AddDeviceRequestModel addDevice, @Header("Authorization") String auth);
 
-    @PUT("v1/device/{device_id}")
-    Call<LoginResponseModel> updateDevice(@Header("Authorization") String auth,
-                                          @Path("device_id")String device_id,
-                                          @Body UpdateDeviceRequest updateDeviceRequest);
-
 }

@@ -56,6 +56,7 @@ public class DevicesRecycleFragment extends Fragment implements DeviceListAdapte
 
     public DevicesRecycleFragment() {
         // Required empty public constructor
+        //this.mListener = listener;
     }
 
     @Override
@@ -166,6 +167,12 @@ public class DevicesRecycleFragment extends Fragment implements DeviceListAdapte
                         deviceList = response.body().getData();
                         deviceListAdapter.setDeviceList(deviceList);
                         Log.i(TAG, "DeviceId: " + deviceList.get(0).getDeviceId());
+                        for(int i=0; i<=deviceList.size()-1; i++){
+                            if(deviceList.get(i).getEscalation() >= 2){
+                                Log.i(TAG,deviceList.get(i).getDeviceName());
+                                Log.i(TAG, String.valueOf(deviceList.get(i).getEscalation()));
+                            }
+                        }
                     }
                 }
                 swipeRefreshLayout.setRefreshing(false);
@@ -188,7 +195,7 @@ public class DevicesRecycleFragment extends Fragment implements DeviceListAdapte
 
     @Override
     public void onSettingClick(Integer position) {
-        Intent intent = new Intent(getActivity(),SettingsActivity.class);
+        Intent intent = new Intent(getActivity(),Preferance.class);
         intent.putExtra("DeviceData",new Gson().toJson(deviceList.get(position)));
         startActivity(intent);
     }
@@ -219,4 +226,5 @@ public class DevicesRecycleFragment extends Fragment implements DeviceListAdapte
             }
         });
     }
+
 }
