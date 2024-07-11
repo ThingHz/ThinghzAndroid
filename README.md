@@ -4,7 +4,7 @@
 User can effectivaly manage, control and monitor IoT devices in real time using this mobile applcation. It provides secure authenticaltion and authorization of user using AWS cognito. It provides one click secure provisioning of IoT devices using AWS IoT core. 
 Know more about ThingHz IoT devices in this [github repository](https://github.com/ThingHz/thinghz) 
 
-![thinghz_Phone](image_url)
+![thinghz_Phone](https://github.com/ThingHz/ThinghzAndroid/blob/master/thinghzPhone_collage.png)
 
 # Features
 - **Secure commisioning of devices**:  
@@ -28,7 +28,7 @@ This device provides the real time monitoring and automation capabilities to ind
 
 Know more about ThingHz IoT devices in this [github repository](https://github.com/ThingHz/thinghz) 
 
-![thinghz_Device](image_url)
+![thinghz_Device](https://github.com/ThingHz/ThinghzAndroid/blob/master/Thinghz_device_collage.png)
 
 ## ThingHz IoT Backend 
 ThingHz Backend is made using AWS Serverless architecture. It uses different AWS microservices such as
