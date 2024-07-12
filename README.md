@@ -38,7 +38,7 @@ ThingHz Backend is made using AWS Serverless architecture. It uses different AWS
 - **AWS Time stream**: It is used to store Device Data
 - **API Gateway**: This microservice is used to configure REST APIs.
 
-Know more about ThingHz IoT backend in this [github repository](https://git-codecommit.us-east-1.amazonaws.com/v1/repos/thinghzBackend)
+Know more about ThingHz IoT backend in this [github repository](https://github.com/ThingHz/thinghzIoTBackend)
 
 ## Project FlowChart:
 
